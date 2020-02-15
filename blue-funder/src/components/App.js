@@ -1,4 +1,5 @@
 import React, { Component }  from "react";
+import LandingPage from "./landing-page";
 import '../css/App.css';
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
   render() {
     return(
       <div className="App">
-        <h1>Blue Funder Portal</h1>
+        <LandingPage />
       </div>
     )
   }
