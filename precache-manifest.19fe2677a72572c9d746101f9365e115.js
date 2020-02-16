@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9532d5fc874603f41955c38108b4bd49",
+    "revision": "7fea55ca8235c79cc1dab95cf27bc513",
     "url": "/MaritimeBlue/index.html"
   },
   {
-    "revision": "26bcd7580931c714c8b2",
-    "url": "/MaritimeBlue/static/css/main.579a8323.chunk.css"
+    "revision": "c550bfd28e169304e54f",
+    "url": "/MaritimeBlue/static/css/main.063ffdb1.chunk.css"
   },
   {
     "revision": "791de97eff51238f77ab",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MaritimeBlue/static/js/2.b45d5c97.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "26bcd7580931c714c8b2",
-    "url": "/MaritimeBlue/static/js/main.66f3ca68.chunk.js"
+    "revision": "c550bfd28e169304e54f",
+    "url": "/MaritimeBlue/static/js/main.6aaec701.chunk.js"
   },
   {
     "revision": "a3d4881b5ea080432e88",
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MaritimeBlue/static/media/eva.f4758074.jpg"
   },
   {
-    "revision": "9baabcf5ec05944b6b8117a9f38ac7f7",
-    "url": "/MaritimeBlue/static/media/keith.9baabcf5.jpg"
+    "revision": "8b8988671ccd777cd3d246ad64771188",
+    "url": "/MaritimeBlue/static/media/keith.8b898867.jpg"
   }
 ]);
