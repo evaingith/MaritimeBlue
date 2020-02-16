@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/MaritimeBlue/precache-manifest.20f659ff16e6257d7ee201af0638e5ba.js"
+  "/MaritimeBlue/precache-manifest.a956f3ac0a026fbc890d751bd5c05db2.js"
 );
 
 self.addEventListener('message', (event) => {
