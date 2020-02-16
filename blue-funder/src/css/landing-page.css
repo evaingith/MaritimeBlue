@@ -50,8 +50,9 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding: 125px 100px;
+    padding-top: 60px;
+    padding-bottom: 80px;
 }
 
 @media (max-width: 1000px){
@@ -71,8 +72,8 @@ section{
 }
 
 section h3.title{
-    color: #414a4f;
-    text-transform: capitalize; 
+    color: #043464;
+    text-transform: uppercase;
     font: bold 32px 'Open Sans', sans-serif;
     margin-bottom: 35px;
     text-align: center;
@@ -144,6 +145,10 @@ header nav li:last-child{
 @media (max-width: 700px){
     header{
         flex-direction: column;
+    }
+
+    header img {
+        margin-bottom: 30px;
     }
 
     header h2{
@@ -264,8 +269,49 @@ header nav li:last-child{
     background-color: #fff;
 }
 
-@media (max-width: 1000px){
+.team-banner {
+    display: flex;
+    width: 100%;
+}
 
+.team-card {
+    width: 25%;
+}
+
+.team-name {
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.team-card p {
+    margin: 0px;
+    padding: 0px;
+    color: #000000;
+}
+
+.team-card img {
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+@media (max-width: 850px){
+    .team-banner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-card {
+        width: 100%;
+        text-align: center;
+    }
+
+    .team-card img {
+        margin-top: 30px;
+    }
 }
 
 
@@ -278,8 +324,25 @@ header nav li:last-child{
     background-color: #f7f7f7;
 }
 
-@media (max-width: 1000px){
+.sponsor-img {
+    width: 200px;
+    height: 160px;
+}
 
+.sponsor-banner {
+    display: flex;
+    align-items: center;
+}
+
+.sponsor-banner div {
+    width: 50%;
+}
+
+@media (max-width: 800px){
+    .sponsor-img {
+      width: 170px;
+      height: 130px;
+    }
 }
 
 /*-------------
