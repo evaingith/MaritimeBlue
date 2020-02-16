@@ -128,6 +128,7 @@ header nav{
 
 header nav li{
     margin: 0 15px;
+    font-weight: bold;
 }
 
 header nav li:first-child{
@@ -243,6 +244,10 @@ header nav li:last-child{
     color: #FFFFFF;
 }
 
+.overview p {
+   text-align: left;
+}
+
 .overview h3.title{
     color: #FFFFFF;
 }
@@ -331,13 +336,19 @@ header nav li:last-child{
 }
 
 .sponsor-img {
-    width: 200px;
-    height: 160px;
+    width: 280px;
+    height: 200px;
 }
 
 .sponsor-banner {
     display: flex;
     align-items: center;
+}
+
+.sponsor-banner p {
+    font-size: 14pt;
+    color: #000000;
+    text-align: left;
 }
 
 .sponsor-banner div {
