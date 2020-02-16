@@ -38,7 +38,7 @@ class LandingPage extends Component {
         <a name="overview"></a>
         <section className="overview">
           <h3 className="title">Overview</h3>
-          <p>Currently entrepreneurs in the Maritime industry are facing the problem of spending too much time searching across many different resources/avenues to find funding that supports “Blue” growth within the industry. Our Blue Funder Portal aims to provide one central location for Maritime innovators to find and search for a wide range of currently available funding opportunities in order to fund their projects.</p>
+          <p>Currently entrepreneurs in the Maritime industry are facing the problem of spending too much time searching across many different resources/avenues to find funding that supports “Blue” growth within the industry. Our <b>Blue Funder Portal</b> aims to provide one central location for <b>Maritime innovators</b> to find and search for a wide range of currently available <b>funding opportunities</b> in order to fund their projects.</p>
         </section>
 
 
