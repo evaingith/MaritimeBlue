@@ -1,5 +1,9 @@
 import React, { Component }  from "react";
 import '../css/landing-page.css';
+import aphoto from '../img/ashley.png';
+import cphoto from '../img/changyu.jpg';
+import ephoto from '../img/eva.jpg';
+import kphoto from '../img/keith.jpg';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -51,25 +55,25 @@ class LandingPage extends Component {
           <h3 className="title">Our Team</h3>
           <div className="team-banner">
             <div className="team-card">
-              <img alt="team member" src="https://i.redd.it/wissuwm1o8521.jpg" />
+              <img alt="team member" src={ephoto} />
               <p className="team-name">Eva (Yuan) Yin</p>
               <p>Data Analyst, Front End Developer</p>
               <p>yin7@uw.edu</p>
             </div>
             <div className="team-card">
-              <img alt="team member" src="https://i.redd.it/wissuwm1o8521.jpg" />
+              <img alt="team member" src={cphoto} />
               <p className="team-name">Changyu Li</p>
               <p>Data Analyst, Front End Developer</p>
               <p>Changl28@uw.edu</p>
             </div>
             <div className="team-card">
-              <img alt="team member" src="https://i.redd.it/wissuwm1o8521.jpg" />
+              <img alt="team member" src={aphoto} />
               <p className="team-name">Ashley (Yufei) Zhou</p>
               <p>Data Analyst, UX Designer</p>
               <p>zhouy58@uw.edu</p>
             </div>
             <div className="team-card">
-              <img alt="team member"  src="https://i.redd.it/wissuwm1o8521.jpg" />
+              <img alt="team member"  src={kphoto} />
               <p className="team-name">Keith Roberts</p>
               <p>Software Engineer</p>
               <p>keithrob@uw.edu</p>
