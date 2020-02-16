@@ -301,6 +301,7 @@ header nav li:last-child{
     border-radius: 50%;
     width: 150px;
     height: 150px;
+    object-fit: cover;
 }
 
 @media (max-width: 850px){
