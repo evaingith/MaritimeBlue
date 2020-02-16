@@ -40,7 +40,8 @@ a.btn{
 }
 
 a.btn:hover {
-    background-color: #006088;
+    background-color: #FFFFFF;
+    color:#006088;
 }
 
 hr{
