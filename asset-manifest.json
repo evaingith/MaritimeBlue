@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/MaritimeBlue/static/css/main.d47729d6.chunk.css",
-    "main.js": "/MaritimeBlue/static/js/main.076ac4cd.chunk.js",
-    "main.js.map": "/MaritimeBlue/static/js/main.076ac4cd.chunk.js.map",
+    "main.css": "/MaritimeBlue/static/css/main.a0e6179a.chunk.css",
+    "main.js": "/MaritimeBlue/static/js/main.37d40d93.chunk.js",
+    "main.js.map": "/MaritimeBlue/static/js/main.37d40d93.chunk.js.map",
     "runtime-main.js": "/MaritimeBlue/static/js/runtime-main.9a1a484c.js",
     "runtime-main.js.map": "/MaritimeBlue/static/js/runtime-main.9a1a484c.js.map",
     "static/js/2.b45d5c97.chunk.js": "/MaritimeBlue/static/js/2.b45d5c97.chunk.js",
     "static/js/2.b45d5c97.chunk.js.map": "/MaritimeBlue/static/js/2.b45d5c97.chunk.js.map",
     "index.html": "/MaritimeBlue/index.html",
-    "precache-manifest.c49571a90d95328fc1b98d9af28a4247.js": "/MaritimeBlue/precache-manifest.c49571a90d95328fc1b98d9af28a4247.js",
+    "precache-manifest.20f659ff16e6257d7ee201af0638e5ba.js": "/MaritimeBlue/precache-manifest.20f659ff16e6257d7ee201af0638e5ba.js",
     "service-worker.js": "/MaritimeBlue/service-worker.js",
-    "static/css/main.d47729d6.chunk.css.map": "/MaritimeBlue/static/css/main.d47729d6.chunk.css.map",
+    "static/css/main.a0e6179a.chunk.css.map": "/MaritimeBlue/static/css/main.a0e6179a.chunk.css.map",
     "static/js/2.b45d5c97.chunk.js.LICENSE.txt": "/MaritimeBlue/static/js/2.b45d5c97.chunk.js.LICENSE.txt",
     "static/media/ashley.png": "/MaritimeBlue/static/media/ashley.7b9e4b6f.png",
     "static/media/changyu.jpg": "/MaritimeBlue/static/media/changyu.c6135bab.jpg",
@@ -20,7 +20,7 @@
   "entrypoints": [
     "static/js/runtime-main.9a1a484c.js",
     "static/js/2.b45d5c97.chunk.js",
-    "static/css/main.d47729d6.chunk.css",
-    "static/js/main.076ac4cd.chunk.js"
+    "static/css/main.a0e6179a.chunk.css",
+    "static/js/main.37d40d93.chunk.js"
   ]
 }
