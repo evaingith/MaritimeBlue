@@ -279,6 +279,10 @@ header nav li:last-child{
     background-color: #f7f7f7;
 }
 
+.features p {
+    font-size: 14pt;
+}
+
 @media (max-width: 1000px){
 
 }
