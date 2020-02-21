@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "af12e286c75c223d819163dd23a6f202",
+    "revision": "5208e33f3d994d5ab0d1b26ecf1e227a",
     "url": "/MaritimeBlue/index.html"
   },
   {
-    "revision": "84058bac2a18bca8b423",
-    "url": "/MaritimeBlue/static/css/main.a0e6179a.chunk.css"
+    "revision": "ec4f68df01a673fb638e",
+    "url": "/MaritimeBlue/static/css/main.70f7d6ef.chunk.css"
   },
   {
     "revision": "791de97eff51238f77ab",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MaritimeBlue/static/js/2.b45d5c97.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "84058bac2a18bca8b423",
-    "url": "/MaritimeBlue/static/js/main.076ac4cd.chunk.js"
+    "revision": "ec4f68df01a673fb638e",
+    "url": "/MaritimeBlue/static/js/main.dd8ad518.chunk.js"
   },
   {
     "revision": "a3d4881b5ea080432e88",
