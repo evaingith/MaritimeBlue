@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import LandingPage from "./landing-page";
 import LoginPage from "./login-page";
+import ApplicationView from "./application-view";
 import '../css/App.css';
 import {
   BrowserRouter as Router,
@@ -26,6 +27,9 @@ class App extends Component {
             </Route>
             <Route path="/MaritimeBlue/login">
               <LoginPage />
+            </Route>
+            <Route path="/MaritimeBlue/portal">
+              <ApplicationView />
             </Route>
           </Switch>
         </Router>

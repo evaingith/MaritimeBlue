@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
+import { Link as Linker } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -147,13 +148,14 @@ const LoginPage = () => {
                       </Link>
                     </Grid>
                   </Grid>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    className={classes.submit}
-                  >
-                    Sign In
-                  </Button>
+                  <Linker to="/MaritimeBlue/portal">
+                    <Button
+                      variant="contained"
+                      className={classes.submit}
+                    >
+                      Sign In
+                    </Button>
+                  </Linker>
                 </form>
               </CardContent>
             </Card>
