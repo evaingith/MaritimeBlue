@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/MaritimeBlue/static/css/main.70f7d6ef.chunk.css",
-    "main.js": "/MaritimeBlue/static/js/main.2028decb.chunk.js",
-    "main.js.map": "/MaritimeBlue/static/js/main.2028decb.chunk.js.map",
+    "main.js": "/MaritimeBlue/static/js/main.5063117e.chunk.js",
+    "main.js.map": "/MaritimeBlue/static/js/main.5063117e.chunk.js.map",
     "runtime-main.js": "/MaritimeBlue/static/js/runtime-main.9a1a484c.js",
     "runtime-main.js.map": "/MaritimeBlue/static/js/runtime-main.9a1a484c.js.map",
     "static/js/2.e0323002.chunk.js": "/MaritimeBlue/static/js/2.e0323002.chunk.js",
     "static/js/2.e0323002.chunk.js.map": "/MaritimeBlue/static/js/2.e0323002.chunk.js.map",
     "index.html": "/MaritimeBlue/index.html",
-    "precache-manifest.c6e6962601829bf4874d62d2fbfbcc62.js": "/MaritimeBlue/precache-manifest.c6e6962601829bf4874d62d2fbfbcc62.js",
+    "precache-manifest.b3a7ad70074a79ac1abec68a0186161b.js": "/MaritimeBlue/precache-manifest.b3a7ad70074a79ac1abec68a0186161b.js",
     "service-worker.js": "/MaritimeBlue/service-worker.js",
     "static/css/main.70f7d6ef.chunk.css.map": "/MaritimeBlue/static/css/main.70f7d6ef.chunk.css.map",
     "static/js/2.e0323002.chunk.js.LICENSE.txt": "/MaritimeBlue/static/js/2.e0323002.chunk.js.LICENSE.txt",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.9a1a484c.js",
     "static/js/2.e0323002.chunk.js",
     "static/css/main.70f7d6ef.chunk.css",
-    "static/js/main.2028decb.chunk.js"
+    "static/js/main.5063117e.chunk.js"
   ]
 }
