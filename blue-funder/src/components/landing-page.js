@@ -1,4 +1,5 @@
 import React, { Component }  from "react";
+import { Link } from "react-router-dom";
 import '../css/landing-page.css';
 import aphoto from '../img/ashley.png';
 import cphoto from '../img/changyu.jpg';
@@ -31,7 +32,7 @@ class LandingPage extends Component {
           <div className="background-image"></div>
           <h1>BLUE FUNDER PORTAL</h1>
           <h3>Connects Maritime entrepreneurs to a variety of investment resources</h3>
-          <a href="https://github.com/evaingith/MaritimeBlue" className="btn">Explore Blue Funder Portal</a>
+          <a href="https://github.com/evaingith/MaritimeBlue" className="btn"><Link to="/login">Explore Blue Funder Portal</Link></a>
         </section>
 
 
