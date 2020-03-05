@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5208e33f3d994d5ab0d1b26ecf1e227a",
+    "revision": "9d4106250e7870c734a5b908e1fe78ad",
     "url": "/MaritimeBlue/index.html"
   },
   {
-    "revision": "ec4f68df01a673fb638e",
+    "revision": "666a033a5ee162d635f8",
     "url": "/MaritimeBlue/static/css/main.70f7d6ef.chunk.css"
   },
   {
-    "revision": "791de97eff51238f77ab",
-    "url": "/MaritimeBlue/static/js/2.b45d5c97.chunk.js"
+    "revision": "23f4cc84e4a6e8c2af9b",
+    "url": "/MaritimeBlue/static/js/2.e0323002.chunk.js"
   },
   {
-    "revision": "99bd0487192ec9e7d9ee8fbbd91ee444",
-    "url": "/MaritimeBlue/static/js/2.b45d5c97.chunk.js.LICENSE.txt"
+    "revision": "3adc01bea76e7956dc3633ee898f6936",
+    "url": "/MaritimeBlue/static/js/2.e0323002.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ec4f68df01a673fb638e",
-    "url": "/MaritimeBlue/static/js/main.dd8ad518.chunk.js"
+    "revision": "666a033a5ee162d635f8",
+    "url": "/MaritimeBlue/static/js/main.2028decb.chunk.js"
   },
   {
     "revision": "a3d4881b5ea080432e88",
