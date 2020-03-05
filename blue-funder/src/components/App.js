@@ -21,10 +21,10 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/MaritimeBlue/">
               <LandingPage />
             </Route>
-            <Route path="/login">
+            <Route path="/MaritimeBlue/login">
               <LoginPage />
             </Route>
           </Switch>
