@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import IntroPage from "./intro-page";
@@ -12,7 +13,26 @@ import ListingPage from "./listing-page";
 import InsightPage from "./insights-page";
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  footerText: {
+    width: '400px',
+    color: 'white',
+    paddingTop: '20px',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '14pt',
+      width: '300px',
+    },
+  },
+
+  footer: {
+    height: '250px',
+    width: '100%',
+    backgroundColor: '#006088',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    color: 'white',
+    display: 'flex',
+    flexDirection: 'column',
   },
 
   tool: {
@@ -23,12 +43,18 @@ const useStyles = makeStyles(theme => ({
 
   tab: {
     marginLeft: "30px",
-  }
+  },
+
+  logo: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
 }));
 
 const ApplicationView = () => {
   const classes = useStyles();
-  const [view, setView] = useState('intro');
+  const [view, setView] = useState('listing');
   const CurrentView = () => {
     if (view === 'intro') {
       return <IntroPage />;
@@ -53,8 +79,14 @@ const ApplicationView = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <div>
-        <CurrentView />
+      <CurrentView />
+      <div className={classes.footer}>
+        <Typography variant="h4" className={classes.footerText}>
+          Want to add your funding information to the portal?
+        </Typography>
+        <Link variant="h5" className={classes.footerText}>
+          CONTACT US
+        </Link>
       </div>
     </Grid>
   )
