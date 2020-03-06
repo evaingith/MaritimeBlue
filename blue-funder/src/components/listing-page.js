@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
+import React from "react";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
@@ -79,7 +77,7 @@ const valuetext = (value) => {
   return `${value}°C`;
 }
 
-const ListingPage = () => {
+const ListingPage = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     capitalType: '',
@@ -89,10 +87,6 @@ const ListingPage = () => {
   });
 
   const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
 
   const [value, setValue] = React.useState([0, 100]);
   const [value2, setValue2] = React.useState([0, 15]);
@@ -239,7 +233,7 @@ const ListingPage = () => {
           />
         </div>
       </div>
-      <TableList />
+      <TableList viewDetail={props.viewDetail}/>
     </div>
   )
 }

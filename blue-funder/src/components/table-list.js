@@ -63,7 +63,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TableList = () =>{
+const TableList = (props) =>{
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -95,9 +95,9 @@ const TableList = () =>{
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={index} onClick={() => props.viewDetail(index)}>
                   {columns.map(column => {
                     const value = row[column.id];
                     return (

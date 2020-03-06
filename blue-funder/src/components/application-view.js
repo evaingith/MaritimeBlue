@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import IntroPage from "./intro-page";
 import ListingPage from "./listing-page";
 import InsightPage from "./insights-page";
+import DetailPage from "./detail-page";
 
 const useStyles = makeStyles(theme => ({
   footerText: {
@@ -43,6 +44,9 @@ const useStyles = makeStyles(theme => ({
 
   tab: {
     marginLeft: "30px",
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '0px',
+    },
   },
 
   logo: {
@@ -54,14 +58,21 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationView = () => {
   const classes = useStyles();
+  const [detail, setDetail] = useState(0);
   const [view, setView] = useState('listing');
+  const viewDetail = (id) => {
+    setView('detail');
+    setDetail(id);
+  }
   const CurrentView = () => {
     if (view === 'intro') {
-      return <IntroPage />;
+      return <IntroPage viewDetail={viewDetail} />;
     } else if (view === 'listing') {
-      return <ListingPage />;
+      return <ListingPage viewDetail={viewDetail} />;
     } else if (view === 'insight') {
-      return <InsightPage />;
+      return <InsightPage viewDetail={viewDetail} />;
+    } else if (view === 'detail') {
+      return <DetailPage setView={setView} detail={detail} />;
     }
   }
   return (

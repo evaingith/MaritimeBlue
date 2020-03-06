@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -10,8 +8,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const InsightPage = () => {
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <h1>Insights</h1>
     </div>
   )
