@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
 const ApplicationView = () => {
   const classes = useStyles();
   const [detail, setDetail] = useState(0);
-  const [view, setView] = useState('insight');
+  const [view, setView] = useState('intro');
   const viewDetail = (id) => {
     setView('detail');
     setDetail(id);
