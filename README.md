@@ -3,7 +3,7 @@
 
 This is the code repository for the MVP of the Blue Funder Portal, a Information School capstone project sponsored by Department of Commerce in Washington State. 
 
-Collabrators may contribute by directly contact with us. Contact info can be found at the bottom
+Collabrators may contribute after directly contacting us. Contact info can be found at the bottom of the README
 
 The current state of the application can be viewed at: https://evaingith.github.io/MaritimeBlue/
 
