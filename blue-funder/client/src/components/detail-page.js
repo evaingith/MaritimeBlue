@@ -5,6 +5,35 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { makeStyles } from '@material-ui/core/styles';
 
+function createData(name, capital, size, term, geofocus, industry, oppName, postDate, endDate) {
+  return {
+           'name': name,
+           'capitalType': capital,
+           'invSize': size,
+           'term': term,
+           'geoFocus': geofocus,
+           'industry': industry,
+           'opportunityName': oppName,
+           'postedDate': postDate,
+           'endDate': endDate,
+         };
+}
+
+const rows = [
+  createData('PSE Grant Association', 'Grant', '100k', '1yr', 'Washington', 'Energy', 'NRCS Conservation Innovation Grant', '11/07/2019', '04/24/2020'),
+  createData('Wells Fargo Bank', 'Debt', '20k', '4yr', 'West Coast', 'Workforce', 'Wells Fargo Workforce Loan', '10/24/2018', '05/22/2020'),
+  createData('Ferry ASC NW', 'Equity (Private)', '500k', '2yr', 'Pacific Northwest', 'Boating', 'ASC Commerce Equity Grant', '10/24/2018', '04/30/2020'),
+  createData('World Bank', 'Venture Capital', '100M', '5yr', 'Nationwide', 'Transportation', 'World Bank Prime Tech Investment', '01/05/2020', '06/20/2020'),
+  createData('University of WA', 'Equity (Public)', '10k', '0yr', 'Washington', 'Education', 'UW Commerce Education Fund', '03/07/2019', '07/21/2020'),
+  createData('Query Investors', 'Angel', '300k', '3yr', 'Washington', 'Maritime Tech', 'Query Tech Accelorator Funding', '04/11/2018', '07/01/2020'),
+  createData('Antarctic Research Grant', 'Grant', '10k', '1yr', 'Washington', 'Research', 'Arctic Sustainability Research Grant', '07/13/2019', '06/02/2020'),
+  createData('National Institutes of Health', 'Grant', '20k', '4yr', 'West Coast', 'Public Health', 'NIH Health Reform Grant', '05/06/2019', '06/20/2020'),
+  createData('PNW Commerce Associates', 'Loan', '1k', '2yr', 'Pacific Northwest', 'Conservation', 'PNW Conservation Loan', '06/05/2018', '06/30/2020'),
+  createData('Capital Bank', 'Venture Capital', '100k', '5yr', 'Nationwide', 'Biological Tech', 'Capital Bank Investors Group', '11/11/2019', '08/24/2020'),
+  createData('University of WA', 'Grant', '10k', '0yr', 'Washington', 'Research', 'UW Maritime Research Grant', '12/13/2019', '09/01/2020'),
+  createData('Maritime Investor Group', 'Angel', '30k', '3yr', 'Washington', 'Renewable Tech', 'Washington Renewable Resource Funding', '01/22/2017', '04/04/2020'),
+];
+
 const useStyles = makeStyles(theme => ({
   content: {
     width: '100%',
@@ -128,7 +157,7 @@ const DetailPage = (props) => {
                         width: '140px',
                         color: 'white',
                         borderRadius: '10px'}} variant="contained">
-          Apply
+          Connect
         </Button>
       </div>
       <div className={classes.heading}>
@@ -140,20 +169,20 @@ const DetailPage = (props) => {
         </div>
         <div className={classes.headingText}>
           <Typography variant="h5" style={{color: '#006088', fontWeight: 'bold', textDecoration: 'underline'}}>
-            Company Name {props.detail}
+            {rows[props.detail]['opportunityName']}
           </Typography>
           <div style={{paddingTop: '20px', paddingBottom: '10px'}}>
             <Typography className={classes.orgDetail} variant="caption">
-              HQ City, State
+              Date Posted:
+            </Typography>
+            <Typography className={classes.orgDetail} style={{display: 'inline'}}>
+              {rows[props.detail]['postedDate']}
             </Typography>
             <Typography className={classes.orgDetail} variant="caption">
-              Organization Type
+              Date Ending:
             </Typography>
-            <Typography className={classes.orgDetail} variant="caption">
-              Legal Status
-            </Typography>
-            <Typography className={classes.orgDetail} variant="caption">
-              Industry
+            <Typography className={classes.orgDetail} style={{display: 'inline'}}>
+              {rows[props.detail]['endDate']}
             </Typography>
           </div>
           <div className={classes.overview}>
@@ -175,24 +204,41 @@ const DetailPage = (props) => {
             <Typography style={{fontWeight: 'bold'}} variant="caption">
               Type of Capital
             </Typography>
-          </div>
-          <div className={classes.statBox}>
-            <Typography style={{fontWeight: 'bold'}} variant="caption">
-              Product Name/Family
+            <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
+              {rows[props.detail]['capitalType']}
             </Typography>
           </div>
           <div className={classes.statBox}>
             <Typography style={{fontWeight: 'bold'}} variant="caption">
-              Total AUM
+              Investment Size
+            </Typography>
+            <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
+              {rows[props.detail]['invSize']}
             </Typography>
           </div>
           <div className={classes.statBox}>
             <Typography style={{fontWeight: 'bold'}} variant="caption">
-              Maritime Portfolio AUM
+              Geographical Focus
+            </Typography>
+            <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
+              {rows[props.detail]['geoFocus']}
+            </Typography>
+          </div>
+          <div className={classes.statBox}>
+            <Typography style={{fontWeight: 'bold'}} variant="caption">
+              Industry Type
+            </Typography>
+            <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
+              {rows[props.detail]['industry']}
             </Typography>
           </div>
         </div>
-        <div className={classes.statRow}>
+      </div>
+    </div>
+  )
+}
+
+        /*<div className={classes.statRow}>
           <div className={classes.statDouble}>
             <div>
             <Typography style={{fontWeight: 'bold'}} variant="caption">
@@ -272,10 +318,6 @@ const DetailPage = (props) => {
               </Typography>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+        </div> */
 
 export default DetailPage;

@@ -34,24 +34,18 @@ function createData(name, capital, size, term, geofocus, industry) {
 }
 
 const rows = [
-  createData('PSE Grants', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
-  createData('Wells Fargo', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
+  createData('PSE Grant Association', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
+  createData('Wells Fargo Bank', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
   createData('Ferry ASC NW', 'Equity (Private)', '500k', '2yr', 'Pacific Northwest', 'Boating'),
   createData('World Bank', 'Venture Capital', '100M', '5yr', 'Nationwide', 'Transportation'),
   createData('University of WA', 'Equity (Public)', '10k', '0yr', 'Washington', 'Education'),
   createData('Query Investors', 'Angel', '300k', '3yr', 'Washington', 'Maritime Tech'),
-  createData('PSE Grants', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
-  createData('Wells Fargo', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
-  createData('Ferry ASC NW', 'Equity (Private)', '500k', '2yr', 'Pacific Northwest', 'Boating'),
-  createData('World Bank', 'Venture Capital', '100M', '5yr', 'Nationwide', 'Transportation'),
-  createData('University of WA', 'Equity (Public)', '10k', '0yr', 'Washington', 'Education'),
-  createData('Query Investors', 'Angel', '300k', '3yr', 'Washington', 'Maritime Tech'),
-  createData('PSE Grants', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
-  createData('Wells Fargo', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
-  createData('Ferry ASC NW', 'Equity (Private)', '500k', '2yr', 'Pacific Northwest', 'Boating'),
-  createData('World Bank', 'Venture Capital', '100M', '5yr', 'Nationwide', 'Transportation'),
-  createData('University of WA', 'Equity (Public)', '10k', '0yr', 'Washington', 'Education'),
-  createData('Query Investors', 'Angel', '300k', '3yr', 'Washington', 'Maritime Tech'),
+  createData('Antarctic Research Grant', 'Grant', '10k', '1yr', 'Washington', 'Research'),
+  createData('National Institutes of Health', 'Grant', '20k', '4yr', 'West Coast', 'Public Health'),
+  createData('PNW Commerce Associates', 'Loan', '1k', '2yr', 'Pacific Northwest', 'Conservation'),
+  createData('Capital Bank', 'Venture Capital', '100k', '5yr', 'Nationwide', 'Biological Tech'),
+  createData('University of WA', 'Grant', '10k', '0yr', 'Washington', 'Research'),
+  createData('Maritime Investor Group', 'Angel', '30k', '3yr', 'Washington', 'Renewable Tech'),
 ];
 
 const useStyles = makeStyles({
@@ -64,6 +58,7 @@ const useStyles = makeStyles({
 });
 
 const TableList = (props) =>{
+  let results = rows;
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
