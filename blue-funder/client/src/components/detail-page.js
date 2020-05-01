@@ -151,7 +151,7 @@ const DetailPage = (props) => {
         <IconButton onClick={() => props.setView('listing')}>
           <ArrowBackIosIcon style={{color: '#006088'}} />
         </IconButton>
-        <Button style={{backgroundColor: '#006088',
+        <Button onClick={() => props.setView('connect')} style={{backgroundColor: '#006088',
                         marginRight: "80px",
                         height: '40px',
                         width: '140px',

@@ -12,6 +12,7 @@ import IntroPage from "./intro-page";
 import ListingPage from "./listing-page";
 import InsightPage from "./insights-page";
 import DetailPage from "./detail-page";
+import ConnectForm from "./connect-form";
 
 const useStyles = makeStyles(theme => ({
   footerText: {
@@ -73,6 +74,8 @@ const ApplicationView = () => {
       return <InsightPage viewDetail={viewDetail} />;
     } else if (view === 'detail') {
       return <DetailPage setView={setView} detail={detail} />;
+    } else if (view === 'connect') {
+      return <ConnectForm viewDetail={viewDetail} detail={detail} />;
     }
   }
   return (

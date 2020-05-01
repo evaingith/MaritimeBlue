@@ -8,6 +8,8 @@ const PROJECT_NAME = 'Blue Portal Admin Page';
 const adapterConfig = { mongoUri: 'mongodb://localhost/keystone' };
 const UserSchema = require('./lists/User.js');
 const UserRequestSchema = require('./lists/UserRequest.js');
+const ListingSchema = require('./lists/Listing.js');
+const ListingRequestSchema = require('./lists/ListingRequest.js');
 
 
 /**
@@ -23,6 +25,8 @@ const keystone = new Keystone({
 
 keystone.createList('User', UserSchema);
 keystone.createList('UserRequest', UserRequestSchema);
+keystone.createList('Listing', ListingSchema);
+keystone.createList('ListingRequest', ListingRequestSchema);
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
