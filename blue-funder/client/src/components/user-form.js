@@ -1,4 +1,4 @@
-import React from "react";
+import React,  { useState }  from "react";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -11,9 +11,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 
-/*
-    LOGIN COMPONENT STYLES
-*/
 const useStyles = makeStyles(theme => ({
   // *
   root: {
@@ -101,20 +98,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginPage = () => {
+const UserForm = () => {
   const classes = useStyles();
-    return (
-      <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-        <Grid item xs={false} sm={4} md={5} className={classes.image} />
-        <Grid item xs={12} sm={8} md={7} className={classes.backdrop} component={Paper} elevation={6} square>
-          <div className={classes.paper}>
-            <Card className={classes.card}>
+  const [submitted, setSubmitted] = useState(false);
+
+  const CurrentView = () => {
+    if (!submitted) {
+      return(
               <CardContent>
                 <div className={classes.logo}>
                 </div>
                 <Typography className={classes.heading} align="left" variant="h6">
-                  ALREADY A MEMBER?
+                  REQUEST ACCESS
                 </Typography>
                 <form className={classes.form} noValidate>
                   <TextField
@@ -122,50 +117,68 @@ const LoginPage = () => {
                     margin="normal"
                     required
                     fullWidth
-                    id="username"
-                    label="Username"
-                    name="username"
-                    autoComplete="username"
+                    id="contactName"
+                    label="Contact Name"
+                    name="contactName"
                     autoFocus
                   />
                   <TextField
                     margin="normal"
                     InputLabelProps={{ required: false }}
                     required
-                    label="Password"
+                    label="Contact Email"
                     fullWidth
-                    name="password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
+                    name="contactEmail"
+                    id="contactEmail"
                   />
-                  <Grid container>
-                    <Grid item xs>
-                    </Grid>
-                    <Grid item>
-                      <Link href="#" variant="body2" color="textSecondary">
-                        {"Forgot Password?"}
-                      </Link>
-                    </Grid>
-                  </Grid>
-                  <Linker to="/MaritimeBlue/portal">
+                  <TextField
+                    margin="normal"
+                    InputLabelProps={{ required: false }}
+                    required
+                    label="Additional Notes"
+                    fullWidth
+                    name="notes"
+                    id="notes"
+                  />
                     <Button
                       variant="contained"
                       className={classes.submit}
+                      onClick={() => setSubmitted(true)}
                     >
-                      Sign In
+                      Submit
                     </Button>
-                  </Linker>
                 </form>
               </CardContent>
+      )
+    } else {
+      return(
+              <CardContent>
+                <div className={classes.logo}>
+                </div>
+                <Typography className={classes.heading} align="left" variant="h6">
+                  THANK YOU
+                </Typography>
+                <Typography style={{marginBottom: '120px', display: 'block'}}align="left" variant="body">
+                  You will receive an email with your access credentials if you are approved.
+                </Typography>
+              </CardContent>
+      )
+    }
+  }
+
+    return (
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={5} className={classes.image} />
+        <Grid item xs={12} sm={8} md={7} className={classes.backdrop} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Card className={classes.card}>
+              <CurrentView />
             </Card>
-            <Typography className={classes.extra} variant="body2" color="textSecondary" align="center">
-              {"Don't have an account yet?"}
-            </Typography>
-            <Link align="center" href="#" variant="body2" style={{color: "white", fontWeight: "bold"}}>
-            <Linker to="/MaritimeBlue/access">
-              {"Contact us"}
-            </Linker>
+            <Link className={classes.extra} variant="body2" color="textSecondary" align="center">
+              <Linker to="/MaritimeBlue/login">
+              {"Return to Login"}
+              </Linker>
             </Link>
           </div>
         </Grid>
@@ -173,4 +186,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default UserForm;

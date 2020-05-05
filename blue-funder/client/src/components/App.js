@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import LandingPage from "./landing-page";
 import LoginPage from "./login-page";
+import UserForm from "./user-form";
 import ApplicationView from "./application-view";
 import '../css/App.css';
 import {
@@ -30,6 +31,9 @@ class App extends Component {
             </Route>
             <Route path="/MaritimeBlue/portal">
               <ApplicationView />
+            </Route>
+            <Route path="/MaritimeBlue/access">
+              <UserForm />
             </Route>
           </Switch>
         </Router>

@@ -13,6 +13,7 @@ import ListingPage from "./listing-page";
 import InsightPage from "./insights-page";
 import DetailPage from "./detail-page";
 import ConnectForm from "./connect-form";
+import ListingForm from "./listing-form";
 
 const useStyles = makeStyles(theme => ({
   footerText: {
@@ -76,6 +77,8 @@ const ApplicationView = () => {
       return <DetailPage setView={setView} detail={detail} />;
     } else if (view === 'connect') {
       return <ConnectForm viewDetail={viewDetail} detail={detail} />;
+    } else if (view === 'addlisting') {
+      return <ListingForm setView={setView}/>;
     }
   }
   return (
@@ -83,7 +86,7 @@ const ApplicationView = () => {
       <CssBaseline />
       <AppBar position="static" style={{ padding: 0 }}>
         <Toolbar className={classes.tool}>
-          <IconButton edge="start" className={classes.logo} color="inherit">
+          <IconButton edge="start" onClick={() => setView('intro')}className={classes.logo} color="inherit">
             <img alt="blue logo" src="https://merequipment.com/wp-content/uploads/WAMarBlue-e1576537274287.png" />
           </IconButton>
           <div>
@@ -98,7 +101,7 @@ const ApplicationView = () => {
         <Typography variant="h4" className={classes.footerText}>
           Want to add your funding information to the portal?
         </Typography>
-        <Link variant="h5" className={classes.footerText}>
+        <Link variant="h5" onClick={() => {setView('addlisting'); window.scrollTo(0,0);}} className={classes.footerText}>
           CONTACT US
         </Link>
       </div>
