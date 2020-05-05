@@ -67,7 +67,7 @@ const ApplicationView = () => {
   }
   const CurrentView = () => {
     if (view === 'intro') {
-      return <IntroPage viewDetail={viewDetail} />;
+      return <IntroPage setView={setView} viewDetail={viewDetail} />;
     } else if (view === 'listing') {
       return <ListingPage viewDetail={viewDetail} />;
     } else if (view === 'insight') {
@@ -88,7 +88,7 @@ const ApplicationView = () => {
           </IconButton>
           <div>
             <Button onClick={() => setView('intro')} className={classes.tab} color="inherit">Introduction</Button>
-            <Button onClick={() => setView('listing')} className={classes.tab} color="inherit">Portal</Button>
+            <Button onClick={() => setView('listing')} className={classes.tab} color="inherit">Opportunities</Button>
             <Button onClick={() => setView('insight')} className={classes.tab} color="inherit">Insights</Button>
           </div>
         </Toolbar>

@@ -185,16 +185,14 @@ const DetailPage = (props) => {
               {rows[props.detail]['endDate']}
             </Typography>
           </div>
-          <div className={classes.overview}>
-            <Typography variant="caption">
-              Organizational Overview
+            <Typography className={classes.orgDetail} variant="caption">
+              Oppurtunity Description:
             </Typography>
-          </div>
-          <div className={classes.services}>
-            <Typography variant="caption">
-              Other Services Provided
+            <div style={{display: 'block'}}>
+            <Typography variant="body">
+              Oppurtunity description here
             </Typography>
-          </div>
+            </div>
         </div>
       </div>
       <hr style={{width: '100%', marginBottom: '20px', marginTop: '40px', backgroundColor: '#e0e0e0'}}/>
