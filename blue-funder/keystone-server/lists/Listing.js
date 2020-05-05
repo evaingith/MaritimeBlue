@@ -14,6 +14,10 @@ module.exports = {
       type: Text,
       isRequired: true,
     },
+    capitalType: {
+      type: Text,
+      isRequired: true,
+    },
     geographicFocus: {
       type: Text,
       isRequired: true,
@@ -31,6 +35,10 @@ module.exports = {
       isRequired: true,
     },
     endDate: {
+      type: Text,
+      isRequired: true,
+    },
+    contact: {
       type: Text,
       isRequired: true,
     },

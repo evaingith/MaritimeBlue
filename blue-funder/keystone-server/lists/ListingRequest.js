@@ -2,7 +2,7 @@ const { Text, Password } = require('@keystonejs/fields');
 
 module.exports = {
   fields: {
-    investorEmail: {
+    contact: {
       type: Text,
       isRequired: true,
     },
@@ -15,6 +15,10 @@ module.exports = {
       isRequired: true,
     },
     investmentTerm: {
+      type: Text,
+      isRequired: true,
+    },
+    capitalType: {
       type: Text,
       isRequired: true,
     },
