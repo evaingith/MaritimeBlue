@@ -283,6 +283,27 @@ header nav li:last-child{
     font-size: 14pt;
 }
 
+.featureRow {
+    display: flex;
+    padding: 30px;
+}
+
+.featureText {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+}
+
+.featureText p {
+    text-align: left;
+}
+
+.featureImg img {
+    box-shadow: 10px 10px 5px grey;
+    height: 300px;
+    max-width: 600px;
+}
+
 @media (max-width: 1000px){
 
 }
@@ -299,6 +320,7 @@ header nav li:last-child{
 .team-banner {
     display: flex;
     width: 100%;
+    padding-bottom: 20px;
 }
 
 .team-card {
