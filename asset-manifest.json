@@ -1,26 +1,29 @@
 {
   "files": {
-    "main.css": "/MaritimeBlue/static/css/main.70f7d6ef.chunk.css",
-    "main.js": "/MaritimeBlue/static/js/main.43fe8e4d.chunk.js",
-    "main.js.map": "/MaritimeBlue/static/js/main.43fe8e4d.chunk.js.map",
+    "main.css": "/MaritimeBlue/static/css/main.56d4841a.chunk.css",
+    "main.js": "/MaritimeBlue/static/js/main.5bb91cf7.chunk.js",
+    "main.js.map": "/MaritimeBlue/static/js/main.5bb91cf7.chunk.js.map",
     "runtime-main.js": "/MaritimeBlue/static/js/runtime-main.9a1a484c.js",
     "runtime-main.js.map": "/MaritimeBlue/static/js/runtime-main.9a1a484c.js.map",
-    "static/js/2.0cb0ea04.chunk.js": "/MaritimeBlue/static/js/2.0cb0ea04.chunk.js",
-    "static/js/2.0cb0ea04.chunk.js.map": "/MaritimeBlue/static/js/2.0cb0ea04.chunk.js.map",
+    "static/js/2.2b88fa5f.chunk.js": "/MaritimeBlue/static/js/2.2b88fa5f.chunk.js",
+    "static/js/2.2b88fa5f.chunk.js.map": "/MaritimeBlue/static/js/2.2b88fa5f.chunk.js.map",
     "index.html": "/MaritimeBlue/index.html",
-    "precache-manifest.cb43c50dfa6ded035e6b95eb24476666.js": "/MaritimeBlue/precache-manifest.cb43c50dfa6ded035e6b95eb24476666.js",
+    "precache-manifest.fefb510a712fb709d5e028cb2a77d569.js": "/MaritimeBlue/precache-manifest.fefb510a712fb709d5e028cb2a77d569.js",
     "service-worker.js": "/MaritimeBlue/service-worker.js",
-    "static/css/main.70f7d6ef.chunk.css.map": "/MaritimeBlue/static/css/main.70f7d6ef.chunk.css.map",
-    "static/js/2.0cb0ea04.chunk.js.LICENSE.txt": "/MaritimeBlue/static/js/2.0cb0ea04.chunk.js.LICENSE.txt",
+    "static/css/main.56d4841a.chunk.css.map": "/MaritimeBlue/static/css/main.56d4841a.chunk.css.map",
+    "static/js/2.2b88fa5f.chunk.js.LICENSE.txt": "/MaritimeBlue/static/js/2.2b88fa5f.chunk.js.LICENSE.txt",
     "static/media/ashley.png": "/MaritimeBlue/static/media/ashley.7b9e4b6f.png",
     "static/media/changyu.jpg": "/MaritimeBlue/static/media/changyu.c6135bab.jpg",
+    "static/media/detail.jpg": "/MaritimeBlue/static/media/detail.eab14ae7.jpg",
     "static/media/eva.jpg": "/MaritimeBlue/static/media/eva.f4758074.jpg",
-    "static/media/keith.jpg": "/MaritimeBlue/static/media/keith.8b898867.jpg"
+    "static/media/finished.jpg": "/MaritimeBlue/static/media/finished.f44617b6.jpg",
+    "static/media/keith.jpg": "/MaritimeBlue/static/media/keith.8b898867.jpg",
+    "static/media/listing.jpg": "/MaritimeBlue/static/media/listing.83bb7364.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.9a1a484c.js",
-    "static/js/2.0cb0ea04.chunk.js",
-    "static/css/main.70f7d6ef.chunk.css",
-    "static/js/main.43fe8e4d.chunk.js"
+    "static/js/2.2b88fa5f.chunk.js",
+    "static/css/main.56d4841a.chunk.css",
+    "static/js/main.5bb91cf7.chunk.js"
   ]
 }
