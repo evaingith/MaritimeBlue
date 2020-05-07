@@ -3,6 +3,8 @@ const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
+const bodyParser = require('body-parser')
+const express = require('express');
 
 const PROJECT_NAME = 'Blue Portal Admin Page';
 const adapterConfig = { mongoUri: 'mongodb://localhost/keystone' };
@@ -37,9 +39,47 @@ const authStrategy = keystone.createAuthStrategy({
   },
 });
 
+async function signin (req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  const result = await authStrategy.validate({
+    username,
+    password,
+  });
+
+  if (result.success) {
+    // Create session and redirect
+     return res.json({
+        success: true,
+        session: true,
+        date: new Date().getTime(),
+        message: result.message
+     });
+  }
+
+  // Return the failure
+  return res.json({ success: false, session: false, message: result.message });
+}
+
+function signout(req, res) {
+   return res.json({ success: true, signedout: true });
+}
+
+function checkAuth(req, res, next) {
+  if (req.user) return next();
+  return res.status(403).json({ 'error': 'no access' });
+}
+
 module.exports = {
   keystone,
   apps: [new GraphQLApp(), new AdminUIApp({ authStrategy,
                                             enableDefaultRoute: true,
                                             isAccessAllowed: ({ authentication: { item: user, listKey: list } }) => !!user && !!user.isAdmin })],
+  configureExpress: app => {
+    app.use(bodyParser.json());
+    app.post('/api/signin', signin);
+    app.post('/api/signout', signout);
+    app.all('/api*', checkAuth);
+  },
 };
