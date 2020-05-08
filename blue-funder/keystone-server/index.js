@@ -5,8 +5,11 @@ const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
 const bodyParser = require('body-parser')
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 const PROJECT_NAME = 'Blue Portal Admin Page';
+const SECRET = 'placeholdersecret';
 const adapterConfig = { mongoUri: 'mongodb://localhost/keystone' };
 const UserSchema = require('./lists/User.js');
 const UserRequestSchema = require('./lists/UserRequest.js');
@@ -50,12 +53,11 @@ async function signin (req, res) {
 
   if (result.success) {
     // Create session and redirect
-     return res.json({
-        success: true,
-        session: true,
-        date: new Date().getTime(),
-        message: result.message
+     const payload = { username };
+     const token = jwt.sign(payload, SECRET, {
+         expiresIn: '1h'
      });
+     return res.cookie('token', token, { httpOnly: true }).sendStatus(200);
   }
 
   // Return the failure
@@ -66,10 +68,26 @@ function signout(req, res) {
    return res.json({ success: true, signedout: true });
 }
 
-function checkAuth(req, res, next) {
-  if (req.user) return next();
-  return res.status(403).json({ 'error': 'no access' });
+function tester(req, res) {
+   return res.json({ success: true });
 }
+
+const checkAuth = function(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) {
+    res.status(401).send('Unauthorized: No token provided');
+  } else {
+    jwt.verify(token, SECRET, function(err, decoded) {
+      if (err) {
+        res.status(401).send('Unauthorized: Invalid token');
+      } else {
+        req.username = decoded.username;
+        next();
+      }
+    });
+  }
+}
+
 
 module.exports = {
   keystone,
@@ -78,8 +96,9 @@ module.exports = {
                                             isAccessAllowed: ({ authentication: { item: user, listKey: list } }) => !!user && !!user.isAdmin })],
   configureExpress: app => {
     app.use(bodyParser.json());
-    app.post('/api/signin', signin);
-    app.post('/api/signout', signout);
-    app.all('/api*', checkAuth);
+    app.use(cookieParser());
+    app.post('/signin', signin);
+    app.post('/signout', signout);
+    app.all('/api*', checkAuth, tester);
   },
 };
