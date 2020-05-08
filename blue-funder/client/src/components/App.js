@@ -1,8 +1,8 @@
 import React, { Component }  from "react";
-import LandingPage from "./landing-page";
-import LoginPage from "./login-page";
-import UserForm from "./user-form";
-import ApplicationView from "./application-view";
+import LandingPage from "./landing-page.js";
+import LoginPage from "./login-page.js";
+import UserForm from "./user-form.js";
+import ApplicationView from "./application-view.js";
 import '../css/App.css';
 import {
   BrowserRouter as Router,

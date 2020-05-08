@@ -17,12 +17,6 @@ const ListingSchema = require('./lists/Listing.js');
 const ListingRequestSchema = require('./lists/ListingRequest.js');
 
 
-/**
- * You've got a new KeystoneJS Project! Things you might want to do next:
- * - Add adapter config options (See: https://keystonejs.com/keystonejs/adapter-mongoose/)
- * - Select configure access control and authentication (See: https://keystonejs.com/api/access-control)
- */
-
 const keystone = new Keystone({
   name: PROJECT_NAME,
   adapter: new Adapter(adapterConfig),
@@ -68,8 +62,8 @@ function signout(req, res) {
    return res.json({ success: true, signedout: true });
 }
 
-function tester(req, res) {
-   return res.json({ success: true });
+function ok_response(req, res) {
+   return res.sendStatus(200);
 }
 
 const checkAuth = function(req, res, next) {
@@ -95,10 +89,11 @@ module.exports = {
                                             enableDefaultRoute: true,
                                             isAccessAllowed: ({ authentication: { item: user, listKey: list } }) => !!user && !!user.isAdmin })],
   configureExpress: app => {
+    app.use('/MaritimeBlue', express.static('public'))
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.post('/signin', signin);
     app.post('/signout', signout);
-    app.all('/api*', checkAuth, tester);
+    app.post('/checkAuth', checkAuth, ok_response);
   },
 };

@@ -8,12 +8,12 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
-import IntroPage from "./intro-page";
-import ListingPage from "./listing-page";
-import InsightPage from "./insights-page";
-import DetailPage from "./detail-page";
-import ConnectForm from "./connect-form";
-import ListingForm from "./listing-form";
+import IntroPage from "./intro-page.js";
+import ListingPage from "./listing-page.js";
+import InsightPage from "./insights-page.js";
+import DetailPage from "./detail-page.js";
+import ConnectForm from "./connect-form.js";
+import ListingForm from "./listing-form.js";
 
 const useStyles = makeStyles(theme => ({
   footerText: {
