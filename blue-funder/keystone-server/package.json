@@ -1,12 +1,12 @@
 {
-  "name": "@keystonejs/example-projects-blank",
-  "description": "A blank KeystoneJS starter project.",
-  "private": true,
+  "name": "Blue Funder Portal",
+  "description": "An application to manage funding opportunities",
+  "private": false,
   "version": "5.0.4",
-  "author": "The KeystoneJS Development Team",
-  "repository": "https://github.com/keystonejs/keystone/tree/master/packages/create-keystone-app/example-projects/blank",
-  "homepage": "https://github.com/keystonejs/keystone",
-  "license": "MIT",
+  "author": "MaritimeBlue Informatics Capstone Team",
+  "repository": "https://github.com/evaingith/MaritimeBlue/",
+  "homepage": "https://github.com/evaingith/MaritimeBlue/",
+  "license": "GPL-3.0",
   "engines": {
     "node": ">=10.0.0"
   },
