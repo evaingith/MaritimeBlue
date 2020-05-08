@@ -3,6 +3,7 @@ import LandingPage from "./landing-page.js";
 import LoginPage from "./login-page.js";
 import UserForm from "./user-form.js";
 import ApplicationView from "./application-view.js";
+import withAuth from './withAuth.js';
 import '../css/App.css';
 import {
   BrowserRouter as Router,
@@ -29,8 +30,7 @@ class App extends Component {
             <Route path="/MaritimeBlue/login">
               <LoginPage />
             </Route>
-            <Route path="/MaritimeBlue/portal">
-              <ApplicationView />
+            <Route path="/MaritimeBlue/portal" component={withAuth(ApplicationView)}>
             </Route>
             <Route path="/MaritimeBlue/access">
               <UserForm />

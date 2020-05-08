@@ -55,7 +55,7 @@ async function signin (req, res) {
   }
 
   // Return the failure
-  return res.json({ success: false, session: false, message: result.message });
+  return res.sendStatus(401);
 }
 
 function signout(req, res) {
@@ -75,7 +75,6 @@ const checkAuth = function(req, res, next) {
       if (err) {
         res.status(401).send('Unauthorized: Invalid token');
       } else {
-        req.username = decoded.username;
         next();
       }
     });

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -101,8 +102,40 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+  const history = useHistory();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value)
+  }
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value)
+
+  }
   const classes = useStyles();
+
+  const submitLogin = (event) => {
+     fetch('/signin', {
+       method: 'POST',
+       body: JSON.stringify({'username': username, 'password': password }),
+       headers: {
+         'Content-Type': 'application/json'
+       }
+     })
+     .then(res => {
+       if (res.status === 200) {
+         history.push('/MaritimeBlue/portal');
+       } else {
+         const error = new Error(res.error);
+         throw error;
+       }
+     })
+     .catch(err => {
+       alert('Invalid username or password, please try again...');
+     });
+  }
+
     return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
@@ -127,6 +160,7 @@ const LoginPage = () => {
                     name="username"
                     autoComplete="username"
                     autoFocus
+                    value={username} onChange={handleUsernameChange}
                   />
                   <TextField
                     margin="normal"
@@ -138,6 +172,7 @@ const LoginPage = () => {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    value={password} onChange={handlePasswordChange}
                   />
                   <Grid container>
                     <Grid item xs>
@@ -148,14 +183,13 @@ const LoginPage = () => {
                       </Link>
                     </Grid>
                   </Grid>
-                  <Linker to="/MaritimeBlue/portal">
                     <Button
+                      onClick={() => submitLogin()}
                       variant="contained"
                       className={classes.submit}
                     >
                       Sign In
                     </Button>
-                  </Linker>
                 </form>
               </CardContent>
             </Card>
