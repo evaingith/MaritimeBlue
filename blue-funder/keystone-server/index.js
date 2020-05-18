@@ -66,6 +66,16 @@ function ok_response(req, res) {
    return res.sendStatus(200);
 }
 
+function verify_token(token) {
+    jwt.verify(token, SECRET, function(err, decoded) {
+      if (err) {
+        return false
+      } else {
+        return true
+      }
+    });
+}
+
 const checkAuth = function(req, res, next) {
   const token = req.cookies.token;
   if (!token) {
@@ -80,7 +90,6 @@ const checkAuth = function(req, res, next) {
     });
   }
 }
-
 
 module.exports = {
   keystone,

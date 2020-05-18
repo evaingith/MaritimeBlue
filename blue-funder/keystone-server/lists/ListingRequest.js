@@ -1,4 +1,4 @@
-const { Text, Password } = require('@keystonejs/fields');
+const { Text, Password, DateTime } = require('@keystonejs/fields');
 
 module.exports = {
   fields: {
@@ -35,15 +35,16 @@ module.exports = {
       isRequired: true,
     },
     postedDate: {
-      type: Text,
+      type: DateTime,
       isRequired: true,
     },
     endDate: {
-      type: Text,
+      type: DateTime,
       isRequired: true,
     },
     description: {
       type: Text,
     },
   },
+  access: true,
 };

@@ -101,9 +101,39 @@ const useStyles = makeStyles(theme => ({
 const UserForm = () => {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
+  const [errored, setErrored] = useState(false);
 
-  const CurrentView = () => {
-    if (!submitted) {
+  const FormList = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [notes, setNotes] = useState('');
+    const handleNameOnChange = (event) => {setName(event.target.value)}
+    const handleEmailOnChange = (event) => {setEmail(event.target.value)}
+    const handleNotesOnChange = (event) => {setNotes(event.target.value)}
+    const submitUserForm = () => {
+      const ADD_USER_REQUEST = `
+        mutation AddUserRequest($name: String!, $email: String!, $notes: String!) {
+          createUserRequest(data: { name: $name, email: $email, notes: $notes }) {
+            id
+          }
+        }`;
+      fetch('/admin/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: ADD_USER_REQUEST, variables: {name: name, email: email, notes: notes }})
+      }).then(response => {
+           if (response.ok) {
+             return response.json();
+           } else {
+             throw new Error('Something went wrong ...');
+          }
+      })
+      .then(data => setSubmitted(true))
+      .catch(error => {setErrored(true)});
+    }
+
       return(
               <CardContent>
                 <div className={classes.logo}>
@@ -120,7 +150,8 @@ const UserForm = () => {
                     id="contactName"
                     label="Contact Name"
                     name="contactName"
-                    autoFocus
+                    value={name}
+                    onChange={(e) => handleNameOnChange(e)}
                   />
                   <TextField
                     margin="normal"
@@ -130,6 +161,8 @@ const UserForm = () => {
                     fullWidth
                     name="contactEmail"
                     id="contactEmail"
+                    value={email}
+                    onChange={(e) => handleEmailOnChange(e)}
                   />
                   <TextField
                     margin="normal"
@@ -139,18 +172,27 @@ const UserForm = () => {
                     fullWidth
                     name="notes"
                     id="notes"
+                    value={notes}
+                    onChange={(e) => handleNotesOnChange(e)}
                   />
                     <Button
                       variant="contained"
                       className={classes.submit}
-                      onClick={() => setSubmitted(true)}
+                      onClick={() => {submitUserForm()}}
                     >
                       Submit
                     </Button>
                 </form>
               </CardContent>
       )
-    } else {
+  }
+
+  const CurrentView = () => {
+    if (!submitted) {
+      return (
+        <FormList key="same"/>
+      )
+    } else if (!errored) {
       return(
               <CardContent>
                 <div className={classes.logo}>
@@ -160,6 +202,19 @@ const UserForm = () => {
                 </Typography>
                 <Typography style={{marginBottom: '120px', display: 'block'}}align="left" variant="body">
                   You will receive an email with your access credentials if you are approved.
+                </Typography>
+              </CardContent>
+      )
+    } else {
+      return(
+              <CardContent>
+                <div className={classes.logo}>
+                </div>
+                <Typography className={classes.heading} align="left" variant="h6">
+                  ERROR
+                </Typography>
+                <Typography style={{marginBottom: '120px', display: 'block'}}align="left" variant="body">
+                  We were unable to process your request, please try again later...
                 </Typography>
               </CardContent>
       )
