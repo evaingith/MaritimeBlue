@@ -62,9 +62,16 @@ const ApplicationView = () => {
   const classes = useStyles();
   const [detail, setDetail] = useState(0);
   const [view, setView] = useState('intro');
+  const [contact, setContact] = useState('');
+  const [title, setTitle] = useState('');
   const viewDetail = (id) => {
     setView('detail');
     setDetail(id);
+  }
+  const viewConnect = (contact, title) => {
+    setView('connect');
+    setContact(contact);
+    setTitle(title);
   }
   const CurrentView = () => {
     if (view === 'intro') {
@@ -74,9 +81,9 @@ const ApplicationView = () => {
     } else if (view === 'insight') {
       return <InsightPage viewDetail={viewDetail} />;
     } else if (view === 'detail') {
-      return <DetailPage setView={setView} detail={detail} />;
+      return <DetailPage setView={setView} viewConnect={viewConnect} detail={detail} />;
     } else if (view === 'connect') {
-      return <ConnectForm viewDetail={viewDetail} detail={detail} />;
+      return <ConnectForm viewDetail={viewDetail} detail={detail} contact={contact} title={title}/>;
     } else if (view === 'addlisting') {
       return <ListingForm setView={setView}/>;
     }

@@ -145,12 +145,13 @@ const useStyles = makeStyles(theme => ({
 
 const DetailPage = (props) => {
   const classes = useStyles();
-  const [detail, setDetail] = useState({opportunityName: '', postedDate: '', endDate: '', description: '', investmentSize: '', investmentTerm: '', capitalType: '', geographicFocus: '', industryFocus: ''});
+  const [detail, setDetail] = useState({opportunityName: '', postedDate: '', endDate: '', description: '', investmentSize: '', investmentTerm: '', capitalType: '', geographicFocus: '', industryFocus: '', contact: ''});
   const fetchData = (id) => {
     const GET_LISTING = `
           query GetUserById($id: ID!) {
             Listing(where: { id: $id }) {
               id
+              contact
               postedDate
               endDate
               description
@@ -188,7 +189,7 @@ const DetailPage = (props) => {
         <IconButton onClick={() => props.setView('listing')}>
           <ArrowBackIosIcon style={{color: '#006088'}} />
         </IconButton>
-        <Button onClick={() => props.setView('connect')} style={{backgroundColor: '#006088',
+        <Button onClick={() => props.viewConnect(detail['contact'], detail['opportunityName'])} style={{backgroundColor: '#006088',
                         marginRight: "80px",
                         height: '40px',
                         width: '140px',

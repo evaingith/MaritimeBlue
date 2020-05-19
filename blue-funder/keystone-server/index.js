@@ -15,6 +15,7 @@ const UserSchema = require('./lists/User.js');
 const UserRequestSchema = require('./lists/UserRequest.js');
 const ListingSchema = require('./lists/Listing.js');
 const ListingRequestSchema = require('./lists/ListingRequest.js');
+const ConnectRequestSchema = require('./lists/ConnectRequest.js');
 
 
 const keystone = new Keystone({
@@ -26,6 +27,7 @@ keystone.createList('User', UserSchema);
 keystone.createList('UserRequest', UserRequestSchema);
 keystone.createList('Listing', ListingSchema);
 keystone.createList('ListingRequest', ListingRequestSchema);
+keystone.createList('ConnectRequest', ConnectRequestSchema);
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,

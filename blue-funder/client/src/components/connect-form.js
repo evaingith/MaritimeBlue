@@ -32,9 +32,41 @@ const useStyles = makeStyles(theme => ({
 const ConnectForm = (props) => {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
+  const [errored, setErrored] = useState(false);
 
-  const CurrentView = () => {
-    if (!submitted) {
+  const FormList = () => {
+      const [name, setName] = useState('');
+      const [description, setDescription] = useState('');
+      const [email, setEmail] = useState('');
+      const [locate, setLocate] = useState('');
+      const handleNameOnChange = (event) => {setName(event.target.value)}
+      const handleDescriptionOnChange = (event) => {setDescription(event.target.value)}
+      const handleEmailOnChange = (event) => {setEmail(event.target.value)}
+      const handleLocateOnChange = (event) => {setLocate(event.target.value)}
+      const submitForm = () => {
+      const ADD_CONNECT_REQUEST = `
+        mutation AddConnetRequest($name: String!, $email: String!, $description: String!, $locate: String!, $contact: String!, $title: String!) {
+          createConnectRequest(data: { applicantName: $name, applicantEmail: $email, applicantLocation: $locate, description: $description, investorContact: $contact, opportunityName: $title }) {
+            id
+          }
+        }`;
+      fetch('/admin/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: ADD_CONNECT_REQUEST, variables: {name: name, email: email, description: description, locate: locate, contact: props.contact, title: props.title }})
+      }).then(response => {
+           if (response.ok) {
+             return response.json();
+           } else {
+             throw new Error('Something went wrong ...');
+          }
+      })
+      .then(data => setSubmitted(true))
+      .catch(error => {setErrored(true)});
+    }
+
       return(
         <div>
           <Typography variant="h6" style={{color: '#006088', fontWeight: 'bold', paddingBottom: '20px'}}>
@@ -46,6 +78,8 @@ const ConnectForm = (props) => {
             required
             label="Contact Name"
             fullWidth
+            value={name}
+            onChange={(e) => handleNameOnChange(e)}
             name="name"
            />
           <TextField
@@ -54,6 +88,8 @@ const ConnectForm = (props) => {
             required
             label="Contact Email"
             fullWidth
+            value={email}
+            onChange={(e) => handleEmailOnChange(e)}
             name="email"
            />
           <TextField
@@ -62,6 +98,8 @@ const ConnectForm = (props) => {
             required
             label="Location"
             fullWidth
+            value={locate}
+            onChange={(e) => handleLocateOnChange(e)}
             name="location"
            />
           <TextField
@@ -70,20 +108,29 @@ const ConnectForm = (props) => {
             required
             label="Project Description"
             fullWidth
+            value={description}
+            onChange={(e) => handleDescriptionOnChange(e)}
             name="description"
            />
           <div style={{ marginLeft: '90%' }}>
             <Button
-              onClick={() => setSubmitted(true)}
+              onClick={() => submitForm()}
               variant="contained"
               className={classes.submit}
              >
               Submit
             </Button>
           </div>
-        </div>
+      </div>
       )
-    } else {
+  }
+
+  const CurrentView = () => {
+    if (!submitted) {
+      return (
+        <FormList key="same"/>
+      )
+    } else if (!errored) {
       return(
       <div>
         <Typography variant="h6" style={{color: '#006088', fontWeight: 'bold', paddingBottom: '20px'}}>
@@ -91,6 +138,26 @@ const ConnectForm = (props) => {
         </Typography>
         <Typography variant="caption" style={{fontSize: '11pt'}}>
           Expect to be contacted by the poster of this listing  shortly for further details...
+        </Typography>
+        <div style={{ marginLeft: '80%' }}>
+            <Button
+              onClick={() => props.viewDetail(props.detail)}
+              variant="contained"
+              className={classes.submit}
+             >
+              Return to listing
+            </Button>
+        </div>
+      </div>
+      )
+    } else {
+      return(
+      <div>
+        <Typography variant="h6" style={{color: '#006088', fontWeight: 'bold', paddingBottom: '20px'}}>
+          Error
+        </Typography>
+        <Typography variant="caption" style={{fontSize: '11pt'}}>
+          We could not process your request at this time, please try again later...
         </Typography>
         <div style={{ marginLeft: '80%' }}>
             <Button
