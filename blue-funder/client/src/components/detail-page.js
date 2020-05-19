@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState }from "react";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -145,6 +145,43 @@ const useStyles = makeStyles(theme => ({
 
 const DetailPage = (props) => {
   const classes = useStyles();
+  const [detail, setDetail] = useState({opportunityName: '', postedDate: '', endDate: '', description: '', investmentSize: '', investmentTerm: '', capitalType: '', geographicFocus: '', industryFocus: ''});
+  const fetchData = (id) => {
+    const GET_LISTING = `
+          query GetUserById($id: ID!) {
+            Listing(where: { id: $id }) {
+              id
+              postedDate
+              endDate
+              description
+              investmentSize
+              investmentTerm
+              capitalType
+              geographicFocus
+              industryFocus
+              opportunityName
+          }
+        }`;
+      fetch('/admin/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: GET_LISTING, variables: {id: id}})
+      }).then(response => {
+           if (response.ok) {
+             return response.json();
+           } else {
+             throw new Error('Something went wrong ...');
+          }
+      })
+      .then(data => setDetail(data.data.Listing))
+      .catch(error => {console.log(error)});
+  }
+  useEffect(() => {
+    fetchData(props.detail);
+  }, []);
+
   return(
     <div className={classes.content}>
       <div className={classes.controls}>
@@ -169,20 +206,20 @@ const DetailPage = (props) => {
         </div>
         <div className={classes.headingText}>
           <Typography variant="h5" style={{color: '#006088', fontWeight: 'bold', textDecoration: 'underline'}}>
-            {rows[props.detail]['opportunityName']}
+            {detail['opportunityName']}
           </Typography>
           <div style={{paddingTop: '20px', paddingBottom: '10px'}}>
             <Typography className={classes.orgDetail} variant="caption">
               Date Posted:
             </Typography>
-            <Typography className={classes.orgDetail} style={{display: 'inline'}}>
-              {rows[props.detail]['postedDate']}
+            <Typography className={classes.orgDetail} style={{display: 'inline', paddingRight: '25px'}}>
+              {new Date(detail['postedDate']).toDateString()}
             </Typography>
             <Typography className={classes.orgDetail} variant="caption">
               Date Ending:
             </Typography>
-            <Typography className={classes.orgDetail} style={{display: 'inline'}}>
-              {rows[props.detail]['endDate']}
+            <Typography className={classes.orgDetail} style={{display: 'inline', paddingRight: '25px'}}>
+              {new Date(detail['endDate']).toDateString()}
             </Typography>
           </div>
             <Typography className={classes.orgDetail} variant="caption">
@@ -190,7 +227,7 @@ const DetailPage = (props) => {
             </Typography>
             <div style={{display: 'block'}}>
             <Typography variant="body">
-              Oppurtunity description here
+              {detail['description']}
             </Typography>
             </div>
         </div>
@@ -203,7 +240,7 @@ const DetailPage = (props) => {
               Type of Capital
             </Typography>
             <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
-              {rows[props.detail]['capitalType']}
+              {detail['capitalType']}
             </Typography>
           </div>
           <div className={classes.statBox}>
@@ -211,7 +248,7 @@ const DetailPage = (props) => {
               Investment Size
             </Typography>
             <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
-              {rows[props.detail]['invSize']}
+              {detail['investmentSize']}
             </Typography>
           </div>
           <div className={classes.statBox}>
@@ -219,7 +256,7 @@ const DetailPage = (props) => {
               Geographical Focus
             </Typography>
             <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
-              {rows[props.detail]['geoFocus']}
+              {detail['geographicFocus']}
             </Typography>
           </div>
           <div className={classes.statBox}>
@@ -227,7 +264,7 @@ const DetailPage = (props) => {
               Industry Type
             </Typography>
             <Typography style={{fontWeight: 'bold', color: '#919195', marginTop: '10px'}} variant="h6" >
-              {rows[props.detail]['industry']}
+              {detail['industryFocus']}
             </Typography>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
@@ -90,6 +90,7 @@ const ListingPage = (props) => {
 
   const [value, setValue] = React.useState([0, 100]);
   const [value2, setValue2] = React.useState([0, 15]);
+  const [listings, setListings] = React.useState([]);
 
   const handleUpdate = (event, newValue) => {
     setValue(newValue);
@@ -104,6 +105,39 @@ const ListingPage = (props) => {
       [name]: event.target.value,
     });
   };
+
+  const fetchData = () => {
+    const GET_LISTINGS = `
+          query {
+            allListings {
+              id
+              investmentSize
+              investmentTerm
+              capitalType
+              geographicFocus
+              industryFocus
+              opportunityName
+          }
+        }`;
+      fetch('/admin/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: GET_LISTINGS})
+      }).then(response => {
+           if (response.ok) {
+             return response.json();
+           } else {
+             throw new Error('Something went wrong ...');
+          }
+      })
+      .then(data => setListings(data.data.allListings))
+      .catch(error => {console.log(error)});
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className={classes.content}>
@@ -233,7 +267,7 @@ const ListingPage = (props) => {
           />
         </div>
       </div>
-      <TableList viewDetail={props.viewDetail}/>
+      <TableList key={listings} oppList={listings} viewDetail={props.viewDetail}/>
     </div>
   )
 }
