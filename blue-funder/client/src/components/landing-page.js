@@ -5,6 +5,9 @@ import aphoto from '../img/ashley.png';
 import cphoto from '../img/changyu.jpg';
 import ephoto from '../img/eva.jpg';
 import kphoto from '../img/keith.jpg';
+import listPhoto from '../img/listing.jpg';
+import detailPhoto from '../img/detail.jpg';
+import donePhoto from '../img/finished.jpg';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -48,7 +51,30 @@ class LandingPage extends Component {
           <h3 className="title">How It Works</h3>
           <p>Innovators and entrepreneurs who are involved with the Maritime sector discover new ways to make the industry more "Blue" each day, encouraging values of sustainability and efficiency within their projects. Finding resources to promote these projects is a monumental task alone, but is critical to pushing the Maritime community towards more eco-friendly practices and ideas. Through this portal, innovators can be directly connected to a widely comprehensive and robust set of investment oppurtunities that match their goals in order to achieve the funding they need.</p>
           <hr></hr>
-          <p>Currently this section is reserved for images and information about various features of our application, but we are still implementing those features! Check back later...</p>
+          <div className="featureRow">
+            <div className="featureImg">
+              <img src={listPhoto} />
+            </div>
+            <div className="featureText">
+              <p>Search across a wide variety of investment opportunities in our searchable and filterable listings page to find a funding source that matches the needs of your project or idea that supports "Blue" growth within the economy.</p>
+            </div>
+          </div>
+          <div className="featureRow">
+            <div className="featureText">
+              <p>Once you have found an opportunity that matches with your project needs, you can reach out and connect with the investor through the listing to let them know that you are interested in their funding opportunity by telling your projects unique story.</p>
+            </div>
+            <div className="featureImg">
+              <img src={detailPhoto} />
+            </div>
+          </div>
+          <div className="featureRow">
+            <div className="featureImg">
+              <img src={donePhoto} />
+            </div>
+            <div className="featureText">
+              <p>When you have successfully connected with an investor who has posted a listing, you should expect hear back from them shortly so that you can further your connection and begin receiving funds to start growing your project and the Blue economy!</p>
+            </div>
+          </div>
         </section>
 
 
@@ -81,6 +107,7 @@ class LandingPage extends Component {
               <p>keithrob@uw.edu</p>
             </div>
           </div>
+          <p>Note: The Informatics Capstone Team no longer owns or maintains this project as of June 5th, 2020. The project is now managed by <a href="https://maritimeblue.org/contact-us/" style={{color: '#006088'}}>Maritime Blue</a> directly.</p>
         </section>
 
         <section className="sponsor">

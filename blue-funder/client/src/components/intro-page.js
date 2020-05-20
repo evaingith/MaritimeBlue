@@ -1,6 +1,7 @@
 import React from "react";
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
@@ -53,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const IntroPage = () => {
+const IntroPage = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -98,13 +99,9 @@ const IntroPage = () => {
           who provide our listings in attain funding.
         </Typography>
       </div>
-      <div className={classes.info}>
-        <Typography variant="body1" style={{marginBottom: '10px'}}>
-          To help you better understand the data presented to you in this portal and how to interact and
-          navigate throughout the application, we have included some viewable information resources that detail three
-          important aspects of our application (click on any card to view the information with more detail):
-        </Typography>
-      </div>
+      <Button onClick={() => props.setView('listing')} variant="contained" style={{color: "#043464", backgroundColor: 'white', marginTop: '25px'}}>
+        Start  ➜
+      </Button>
       <hr style={{width: '50%', margin: 'auto', marginBottom: '20px', marginTop: '60px', backgroundColor: '#74BBFB'}}/>
       <div className={classes.stats}>
         <div className={classes.statRow}>
@@ -144,7 +141,7 @@ const IntroPage = () => {
           </div>
           <div onClick={handleOpen} className={classes.statBox}>
             <Typography style={{fontWeight: 'bold', fontSize: '14pt'}} variant="caption">
-              Applying for Funding
+              Connecting with Investors
             </Typography>
             <div style={{ height: '130px', padding: '20px'}}>
               <Typography variant="body2" component="span">
@@ -175,11 +172,11 @@ const IntroPage = () => {
           >
           <Fade in={open}>
             <div className={classes.paper}>
-              <h2 id="transition-modal-title" style={{marginBottom: '10px'}}>Applying for Funding</h2>
+              <h2 id="transition-modal-title" style={{marginBottom: '10px'}}>Connecting with Investors</h2>
               <p id="transition-modal-description">
                 Once you find a listing that seems to match your particular use case, you can directly apply/contact
                 the investor or entity that included the listing in the portal. To do so, when you are viewing a particular
-                entries detail page, you will find a button labeled 'Apply' in the top right corner. When clicked, you are
+                entries detail page, you will find a button labeled 'Connect' in the top right corner. When clicked, you are
                 prsented with an application form that will include a number of different fields relating to your personal
                 information and business such as your name, project description, current status, and any accomanying links.
                 Once your application is submitted, it will then be sent directly to the person who had listed the oppurtunity.
@@ -203,27 +200,27 @@ const IntroPage = () => {
             <div className={classes.paper}>
               <h2 id="transition-modal-title" style={{marginBottom: '10px'}}>Navigating the Portal</h2>
               <p id="transition-modal-description">
-                There are three primary view associated with the application:
+                At the top of the screen you will find links to two other pages
               </p>
-              <h4>Listings View (Portal)</h4>
+              <h4>Opportunities</h4>
               <p id="transition-modal-description">
-                This page is the primary piece of the application in that it provides you with the data. There are a number of
+                This page allows you to view all listings included within our database. There are a number of
                 different filters and sorts that can be applied to the data displayed on this page to narrow down the results.
-                The user is also provided with a text based search to look for entries that match a provided keyword or phrase.
+                You are also provided with a text based search to look for entries that match a provided keyword or phrase.
               </p>
-              <h4>Listing Detail View (Entry)</h4>
+              <h4>Insights</h4>
               <p id="transition-modal-description">
-                When viewing listings on the listing view, you can click on any entry to be brought to that particular oppurtunities
-                detail page. The detail page provides a more granular and robust profile of the oppurtunity listed in the database.
-                This page will give you further information and details about the particular funding oppurtunity and the investor who
-                provided the listing. The users can apply for an oppurtunity in this page.
-              </p>
-              <h4>Insights View (Insights)</h4>
-              <p id="transition-modal-description">
-                The insights tab in the navigation bar at the top of the screen will bring you to a insights page that gives a 
+                The insights tab will bring you to a insights page that gives a
                 high level overview of the current state of the data within the portal. Information such as the number of current
                 active listings and the total volume of capital offered in the portal are presented here. This page also provides
-                some basic visualizations that describe the distribution of capital and listings in the portal.
+                some basic visualizations that describe the distribution of capital and listings our database.
+              </p>
+              <h4>Listing</h4>
+              <p id="transition-modal-description">
+                When viewing listings of our opportunities, you can click on any entry to be brought to that particular oppurtunities
+                detail page. The detail page provides a more granular and robust profile of the oppurtunity listed in the database.
+                This page will give you further information and details about the particular funding oppurtunity and the investor who
+                provided the listing. You can apply for an oppurtunity on this page by clicking the 'Connect' button.
               </p>
             </div>
           </Fade>

@@ -1,0 +1,48 @@
+{
+  "name": "bluefunderportal",
+  "description": "An application to manage funding opportunities",
+  "private": false,
+  "version": "5.0.4",
+  "author": "MaritimeBlue Informatics Capstone Team",
+  "repository": "https://github.com/evaingith/MaritimeBlue/",
+  "homepage": "https://github.com/evaingith/MaritimeBlue/",
+  "license": "GPL-3.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development DISABLE_LOGGING=false keystone dev",
+    "build": "cross-env NODE_ENV=production keystone build",
+    "compile": "webpack --config webpack.config.js --display-modules",
+    "start": "cross-env NODE_ENV=production keystone start",
+    "create-tables": "keystone create-tables"
+  },
+  "dependencies": {
+    "@keystonejs/adapter-mongoose": "^8.0.0",
+    "@keystonejs/app-admin-ui": "^5.9.5",
+    "@keystonejs/app-graphql": "^5.1.5",
+    "@keystonejs/auth-password": "^5.1.6",
+    "@keystonejs/keystone": "^8.0.0",
+    "babel-loader": "^8.1.0",
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "cross-env": "^7.0.0",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "react": "^16.13.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.9.4",
+    "css-loader": "^3.5.3",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0"
+  }
+}

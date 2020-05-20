@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -29,29 +29,23 @@ const columns = [
   },
 ];
 
-function createData(name, capital, size, term, geofocus, industry) {
-  return { name, capital, size, term, geofocus, industry };
+function createData(name, capital, size, term, geofocus, industry, id) {
+  return { name, capital, size, term, geofocus, industry, id};
 }
 
-const rows = [
-  createData('PSE Grants', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
-  createData('Wells Fargo', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
+const mockData = [
+  createData('PSE Grant Association', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
+  createData('Wells Fargo Bank', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
   createData('Ferry ASC NW', 'Equity (Private)', '500k', '2yr', 'Pacific Northwest', 'Boating'),
   createData('World Bank', 'Venture Capital', '100M', '5yr', 'Nationwide', 'Transportation'),
   createData('University of WA', 'Equity (Public)', '10k', '0yr', 'Washington', 'Education'),
   createData('Query Investors', 'Angel', '300k', '3yr', 'Washington', 'Maritime Tech'),
-  createData('PSE Grants', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
-  createData('Wells Fargo', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
-  createData('Ferry ASC NW', 'Equity (Private)', '500k', '2yr', 'Pacific Northwest', 'Boating'),
-  createData('World Bank', 'Venture Capital', '100M', '5yr', 'Nationwide', 'Transportation'),
-  createData('University of WA', 'Equity (Public)', '10k', '0yr', 'Washington', 'Education'),
-  createData('Query Investors', 'Angel', '300k', '3yr', 'Washington', 'Maritime Tech'),
-  createData('PSE Grants', 'Grant', '100k', '1yr', 'Washington', 'Energy'),
-  createData('Wells Fargo', 'Debt', '20k', '4yr', 'West Coast', 'Workforce'),
-  createData('Ferry ASC NW', 'Equity (Private)', '500k', '2yr', 'Pacific Northwest', 'Boating'),
-  createData('World Bank', 'Venture Capital', '100M', '5yr', 'Nationwide', 'Transportation'),
-  createData('University of WA', 'Equity (Public)', '10k', '0yr', 'Washington', 'Education'),
-  createData('Query Investors', 'Angel', '300k', '3yr', 'Washington', 'Maritime Tech'),
+  createData('Antarctic Research Grant', 'Grant', '10k', '1yr', 'Washington', 'Research'),
+  createData('National Institutes of Health', 'Grant', '20k', '4yr', 'West Coast', 'Public Health'),
+  createData('PNW Commerce Associates', 'Loan', '1k', '2yr', 'Pacific Northwest', 'Conservation'),
+  createData('Capital Bank', 'Venture Capital', '100k', '5yr', 'Nationwide', 'Biological Tech'),
+  createData('University of WA', 'Grant', '10k', '0yr', 'Washington', 'Research'),
+  createData('Maritime Investor Group', 'Angel', '30k', '3yr', 'Washington', 'Renewable Tech'),
 ];
 
 const useStyles = makeStyles({
@@ -68,14 +62,27 @@ const TableList = (props) =>{
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const updateRows = (oppList) => {
+    let results = []
+    for (let i = 0; i < oppList.length; i++) {
+      let entry = oppList[i];
+      results.push(createData(entry['opportunityName'], entry['capitalType'], entry['investmentSize'], entry['investmentTerm'], entry['geographicFocus'], entry['industryFocus'], entry['id']));
+    }
+    return results;
+
+  }
+  const [rows, setRows] = React.useState(updateRows(props.oppList));
+  useEffect(() => { setRows(updateRows(props.oppList)) }, [props.oppList]);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(event.target.value);
     setPage(0);
   };
+
 
   return (
     <div className={classes.root}>
@@ -97,7 +104,7 @@ const TableList = (props) =>{
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={index} onClick={() => props.viewDetail(index)}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={index} onClick={() => props.viewDetail(row['id'])}>
                   {columns.map(column => {
                     const value = row[column.id];
                     return (

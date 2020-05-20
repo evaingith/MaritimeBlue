@@ -8,10 +8,12 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
-import IntroPage from "./intro-page";
-import ListingPage from "./listing-page";
-import InsightPage from "./insights-page";
-import DetailPage from "./detail-page";
+import IntroPage from "./intro-page.js";
+import ListingPage from "./listing-page.js";
+//import InsightPage from "./insights-page.js";
+import DetailPage from "./detail-page.js";
+import ConnectForm from "./connect-form.js";
+import ListingForm from "./listing-form.js";
 
 const useStyles = makeStyles(theme => ({
   footerText: {
@@ -60,19 +62,30 @@ const ApplicationView = () => {
   const classes = useStyles();
   const [detail, setDetail] = useState(0);
   const [view, setView] = useState('intro');
+  const [contact, setContact] = useState('');
+  const [title, setTitle] = useState('');
   const viewDetail = (id) => {
     setView('detail');
     setDetail(id);
   }
+  const viewConnect = (contact, title) => {
+    setView('connect');
+    setContact(contact);
+    setTitle(title);
+  }
   const CurrentView = () => {
     if (view === 'intro') {
-      return <IntroPage viewDetail={viewDetail} />;
+      return <IntroPage setView={setView} viewDetail={viewDetail} />;
     } else if (view === 'listing') {
       return <ListingPage viewDetail={viewDetail} />;
-    } else if (view === 'insight') {
-      return <InsightPage viewDetail={viewDetail} />;
+  //  } else if (view === 'insight') {
+  //    return <InsightPage viewDetail={viewDetail} />;
     } else if (view === 'detail') {
-      return <DetailPage setView={setView} detail={detail} />;
+      return <DetailPage setView={setView} viewConnect={viewConnect} detail={detail} />;
+    } else if (view === 'connect') {
+      return <ConnectForm viewDetail={viewDetail} detail={detail} contact={contact} title={title}/>;
+    } else if (view === 'addlisting') {
+      return <ListingForm setView={setView}/>;
     }
   }
   return (
@@ -80,13 +93,12 @@ const ApplicationView = () => {
       <CssBaseline />
       <AppBar position="static" style={{ padding: 0 }}>
         <Toolbar className={classes.tool}>
-          <IconButton edge="start" className={classes.logo} color="inherit">
+          <IconButton edge="start" onClick={() => setView('intro')}className={classes.logo} color="inherit">
             <img alt="blue logo" src="https://merequipment.com/wp-content/uploads/WAMarBlue-e1576537274287.png" />
           </IconButton>
           <div>
             <Button onClick={() => setView('intro')} className={classes.tab} color="inherit">Introduction</Button>
-            <Button onClick={() => setView('listing')} className={classes.tab} color="inherit">Portal</Button>
-            <Button onClick={() => setView('insight')} className={classes.tab} color="inherit">Insights</Button>
+            <Button onClick={() => setView('listing')} className={classes.tab} color="inherit">Opportunities</Button>
           </div>
         </Toolbar>
       </AppBar>
@@ -95,7 +107,7 @@ const ApplicationView = () => {
         <Typography variant="h4" className={classes.footerText}>
           Want to add your funding information to the portal?
         </Typography>
-        <Link variant="h5" className={classes.footerText}>
+        <Link variant="h5" onClick={() => {setView('addlisting'); window.scrollTo(0,0);}} className={classes.footerText}>
           CONTACT US
         </Link>
       </div>

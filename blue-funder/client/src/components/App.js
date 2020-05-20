@@ -1,7 +1,10 @@
 import React, { Component }  from "react";
-import LandingPage from "./landing-page";
-import LoginPage from "./login-page";
-import ApplicationView from "./application-view";
+import LandingPage from "./landing-page.js";
+import LoginPage from "./login-page.js";
+import UserForm from "./user-form.js";
+import ForgotForm from "./forgot-form.js";
+import ApplicationView from "./application-view.js";
+import withAuth from './withAuth.js';
 import '../css/App.css';
 import {
   BrowserRouter as Router,
@@ -28,8 +31,13 @@ class App extends Component {
             <Route path="/MaritimeBlue/login">
               <LoginPage />
             </Route>
-            <Route path="/MaritimeBlue/portal">
-              <ApplicationView />
+            <Route path="/MaritimeBlue/portal" component={withAuth(ApplicationView)}>
+            </Route>
+            <Route path="/MaritimeBlue/access">
+              <UserForm />
+            </Route>
+            <Route path="/MaritimeBlue/resetpassword">
+              <ForgotForm />
             </Route>
           </Switch>
         </Router>
