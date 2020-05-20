@@ -22,5 +22,7 @@ module.exports = {
     delete: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
     update: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
     create: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+    read: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+    auth: true,
   },
 };
