@@ -16,6 +16,7 @@ const UserRequestSchema = require('./lists/UserRequest.js');
 const ListingSchema = require('./lists/Listing.js');
 const ListingRequestSchema = require('./lists/ListingRequest.js');
 const ConnectRequestSchema = require('./lists/ConnectRequest.js');
+const ForgotRequestSchema = require('./lists/ForgottenPasswordRequest.js');
 
 
 const keystone = new Keystone({
@@ -28,6 +29,7 @@ keystone.createList('UserRequest', UserRequestSchema);
 keystone.createList('Listing', ListingSchema);
 keystone.createList('ListingRequest', ListingRequestSchema);
 keystone.createList('ConnectRequest', ConnectRequestSchema);
+keystone.createList('ForgottenPasswordRequest', ForgotRequestSchema);
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
@@ -97,6 +99,7 @@ module.exports = {
   keystone,
   apps: [new GraphQLApp(), new AdminUIApp({ authStrategy,
                                             enableDefaultRoute: true,
+                                            hooks: require.resolve('./hooks'),
                                             isAccessAllowed: ({ authentication: { item: user, listKey: list } }) => !!user && !!user.isAdmin })],
   configureExpress: app => {
     app.use('/MaritimeBlue', express.static('public'))

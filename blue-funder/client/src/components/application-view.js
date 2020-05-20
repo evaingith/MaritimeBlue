@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import IntroPage from "./intro-page.js";
 import ListingPage from "./listing-page.js";
-import InsightPage from "./insights-page.js";
+//import InsightPage from "./insights-page.js";
 import DetailPage from "./detail-page.js";
 import ConnectForm from "./connect-form.js";
 import ListingForm from "./listing-form.js";
@@ -78,8 +78,8 @@ const ApplicationView = () => {
       return <IntroPage setView={setView} viewDetail={viewDetail} />;
     } else if (view === 'listing') {
       return <ListingPage viewDetail={viewDetail} />;
-    } else if (view === 'insight') {
-      return <InsightPage viewDetail={viewDetail} />;
+  //  } else if (view === 'insight') {
+  //    return <InsightPage viewDetail={viewDetail} />;
     } else if (view === 'detail') {
       return <DetailPage setView={setView} viewConnect={viewConnect} detail={detail} />;
     } else if (view === 'connect') {
@@ -99,7 +99,6 @@ const ApplicationView = () => {
           <div>
             <Button onClick={() => setView('intro')} className={classes.tab} color="inherit">Introduction</Button>
             <Button onClick={() => setView('listing')} className={classes.tab} color="inherit">Opportunities</Button>
-            <Button onClick={() => setView('insight')} className={classes.tab} color="inherit">Insights</Button>
           </div>
         </Toolbar>
       </AppBar>

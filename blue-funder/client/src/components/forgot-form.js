@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React,  { useState, useEffect }  from "react";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,9 +11,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 
-/*
-    LOGIN COMPONENT STYLES
-*/
 const useStyles = makeStyles(theme => ({
   // *
   root: {
@@ -102,38 +98,101 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginPage = (props) => {
-  const history = useHistory();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value)
-  }
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value)
-
-  }
+const ForgotForm = () => {
   const classes = useStyles();
+  const [submitted, setSubmitted] = useState(false);
+  const [errored, setErrored] = useState(false);
 
-  const submitLogin = (event) => {
-     fetch('/signin', {
-       method: 'POST',
-       body: JSON.stringify({'username': username, 'password': password }),
-       headers: {
-         'Content-Type': 'application/json'
-       }
-     })
-     .then(res => {
-       if (res.status === 200) {
-         history.push('/MaritimeBlue/portal');
-       } else {
-         const error = new Error(res.error);
-         throw error;
-       }
-     })
-     .catch(err => {
-       alert('Invalid username or password, please try again...');
-     });
+  const FormList = () => {
+    const [email, setEmail] = useState('');
+    const handleEmailOnChange = (event) => {setEmail(event.target.value)}
+    const submitForgotForm = () => {
+      const ADD_FORGOT_REQUEST = `
+        mutation AddForgottenPasswordRequest($email: String!) {
+          createForgottenPasswordRequest(data: { email: $email}) {
+            id
+          }
+        }`;
+      fetch('/admin/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: ADD_FORGOT_REQUEST, variables: {email: email}})
+      }).then(response => {
+           if (response.ok) {
+             return response.json();
+           } else {
+             throw new Error('Something went wrong ...');
+          }
+      })
+      .then(data => setSubmitted(true))
+      .catch(error => {setErrored(true)});
+    }
+
+      return(
+              <CardContent>
+                <div className={classes.logo}>
+                </div>
+              <form className={classes.form} noValidate>
+                <Typography className={classes.heading} align="left" variant="h6">
+                  FORGOTTEN PASSWORD
+                </Typography>
+                  <TextField
+                    margin="normal"
+                    InputLabelProps={{ required: false }}
+                    required
+                    label="Contact Email"
+                    fullWidth
+                    name="contactEmail"
+                    id="contactEmail"
+                    value={email}
+                    onChange={(e) => handleEmailOnChange(e)}
+                  />
+                    <Button
+                      variant="contained"
+                      className={classes.submit}
+                      onClick={() => {submitForgotForm()}}
+                    >
+                      Submit
+                    </Button>
+                </form>
+              </CardContent>
+      )
+  }
+
+  const CurrentView = () => {
+    if (!submitted) {
+      return (
+        <FormList key="same"/>
+      )
+    } else if (!errored) {
+      return(
+              <CardContent>
+                <div className={classes.logo}>
+                </div>
+                <Typography className={classes.heading} align="left" variant="h6">
+                  THANK YOU
+                </Typography>
+                <Typography style={{marginBottom: '120px', display: 'block'}}align="left" variant="body">
+                  Expect to be emailed shortly with instructions on how to reset your password...
+                </Typography>
+              </CardContent>
+      )
+    } else {
+      return(
+              <CardContent>
+                <div className={classes.logo}>
+                </div>
+                <Typography className={classes.heading} align="left" variant="h6">
+                  ERROR
+                </Typography>
+                <Typography style={{marginBottom: '120px', display: 'block'}}align="left" variant="body">
+                  We were unable to process your request, please try again later...
+                </Typography>
+              </CardContent>
+      )
+    }
   }
 
     return (
@@ -143,63 +202,12 @@ const LoginPage = (props) => {
         <Grid item xs={12} sm={8} md={7} className={classes.backdrop} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Card className={classes.card}>
-              <CardContent>
-                <div className={classes.logo}>
-                </div>
-                <Typography className={classes.heading} align="left" variant="h6">
-                  ALREADY A MEMBER?
-                </Typography>
-                <form className={classes.form} noValidate>
-                  <TextField
-                    InputLabelProps={{ required: false }}
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="username"
-                    label="Username"
-                    name="username"
-                    autoComplete="username"
-                    autoFocus
-                    value={username} onChange={handleUsernameChange}
-                  />
-                  <TextField
-                    margin="normal"
-                    InputLabelProps={{ required: false }}
-                    required
-                    label="Password"
-                    fullWidth
-                    name="password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    value={password} onChange={handlePasswordChange}
-                  />
-                  <Grid container>
-                    <Grid item xs>
-                    </Grid>
-                    <Grid item>
-                      <Linker to="/MaritimeBlue/resetpassword">
-                        {"Forgot Password?"}
-                      </Linker>
-                    </Grid>
-                  </Grid>
-                    <Button
-                      onClick={() => submitLogin()}
-                      variant="contained"
-                      className={classes.submit}
-                    >
-                      Sign In
-                    </Button>
-                </form>
-              </CardContent>
+              <CurrentView />
             </Card>
-            <Typography className={classes.extra} variant="body2" color="textSecondary" align="center">
-              {"Don't have an account yet?"}
-            </Typography>
-            <Link align="center" href="#" variant="body2" style={{color: "white", fontWeight: "bold"}}>
-            <Linker to="/MaritimeBlue/access">
-              {"Contact us"}
-            </Linker>
+            <Link className={classes.extra} variant="body2" color="textSecondary" align="center">
+              <Linker to="/MaritimeBlue/login">
+              {"Return to Login"}
+              </Linker>
             </Link>
           </div>
         </Grid>
@@ -207,4 +215,4 @@ const LoginPage = (props) => {
     )
 }
 
-export default LoginPage;
+export default ForgotForm;

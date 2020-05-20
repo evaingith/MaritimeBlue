@@ -200,10 +200,6 @@ const DetailPage = (props) => {
       </div>
       <div className={classes.heading}>
         <div className={classes.image}>
-          <img 
-            src="https://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder.png"
-            alt="company logo"
-            style={{maxWidth: '100%', maxHeight: '100%', borderRadius: '50%'}}/>
         </div>
         <div className={classes.headingText}>
           <Typography variant="h5" style={{color: '#006088', fontWeight: 'bold', textDecoration: 'underline'}}>

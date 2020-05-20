@@ -2,6 +2,7 @@ import React, { Component }  from "react";
 import LandingPage from "./landing-page.js";
 import LoginPage from "./login-page.js";
 import UserForm from "./user-form.js";
+import ForgotForm from "./forgot-form.js";
 import ApplicationView from "./application-view.js";
 import withAuth from './withAuth.js';
 import '../css/App.css';
@@ -34,6 +35,9 @@ class App extends Component {
             </Route>
             <Route path="/MaritimeBlue/access">
               <UserForm />
+            </Route>
+            <Route path="/MaritimeBlue/resetpassword">
+              <ForgotForm />
             </Route>
           </Switch>
         </Router>

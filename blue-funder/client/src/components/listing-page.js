@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -18,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   formControl: {
-    minWidth: 150,
+    minWidth: 180,
     marginRight: '20px',
   },
 
@@ -68,6 +70,13 @@ const useStyles = makeStyles(theme => ({
     marginRight: '20px',
   },
 
+  submit: {
+    backgroundColor: "#006088",
+    color: "white",
+    verticalAlign: "top",
+    marginTop: "15px",
+  },
+
   label: {
 
   },
@@ -91,15 +100,113 @@ const ListingPage = (props) => {
   const [value, setValue] = React.useState([0, 100]);
   const [value2, setValue2] = React.useState([0, 15]);
   const [listings, setListings] = React.useState([]);
+  const [full, setFull] = React.useState([]);
+  const [cTypes, setCTypes] = React.useState([])
+  const [gTypes, setGTypes] = React.useState([])
+  const [iTypes, setITypes] = React.useState([])
+  const [search, setSearch] = React.useState('');
+  const [temp, setTemp] = React.useState('');
+  const handleSearchOnChange = (event) => {
+    setListings(temp);
+    setSearch(event.target.value);
+    if (event.target.value !== '') {
+      let filtered = Array.from(listings);
+      filtered = filtered.filter(function(a) {
+          return a['opportunityName'].includes(event.target.value);
+      });
+      setListings(filtered);
+    }
+  }
 
-  const handleUpdate = (event, newValue) => {
-    setValue(newValue);
-  };
   const handleUpdate2 = (event, newValue) => {
     setValue2(newValue);
+    let filtered = Array.from(listings);
+    filtered = filtered.filter(function(a) {
+        return parseInt(a['investmentTerm']) <= newValue[1] && parseInt(a['investmentTerm']) >= newValue[0];
+    });
+    setListings(filtered);
+    setTemp(filtered);
   };
 
+  const resetList = () => {
+    setListings(full);
+    setTemp(full);
+    setSearch('');
+    setState({
+      capitalType: '',
+      geographicFocus: '',
+      industryFocus: '',
+      sort: '',
+    });
+  }
+
+  const getTypes = (oppList) => {
+    let cSet = new Set();
+    let gSet = new Set();
+    let iSet = new Set();
+    for (let i = 0; i < oppList.length; i++) {
+      let cType = oppList[i].capitalType;
+      let gType = oppList[i].geographicFocus;
+      let iType = oppList[i].industryFocus;
+      if (!cSet.has(cType)) {
+        cSet.add(cType);
+      }
+      if (!gSet.has(gType)) {
+        gSet.add(gType);
+      }
+      if (!iSet.has(iType)) {
+        iSet.add(iType);
+      }
+    }
+    setCTypes([...cSet]);
+    setGTypes([...gSet]);
+    setITypes([...iSet]);
+  }
+
   const handleChange = name => event => {
+    console.log(name);
+    console.log(event.target.value);
+    if (event.target.value !== '') {
+        let filtered = Array.from(listings);
+        if (name === 'sort') {
+           if (event.target.value === 'a-z') {
+             filtered.sort(function(a, b) {
+               if(a.opportunityName < b.opportunityName) { return -1; }
+               if(a.opportunityName > b.opportunityName) { return 1; }
+               return 0;
+             });
+           } else if (event.target.value === 'z-a') {
+             filtered.sort(function(a, b) {
+               if(a.opportunityName < b.opportunityName) { return 1; }
+               if(a.opportunityName > b.opportunityName) { return -1; }
+               return 0;
+             });
+           } else if (event.target.value === 'size') {
+             filtered.sort(function(a, b) {
+               return parseInt(a['investmentSize']) - parseInt(b['investmentSize']);
+             });
+           } else if (event.target.value === 'term') {
+             filtered.sort(function(a, b) {
+               return parseInt(a['investmentTerm']) - parseInt(b['investmentTerm']);
+             });
+           }
+        } else if (name === 'capitalType') {
+            filtered = filtered.filter(function(a) {
+              return a.capitalType == event.target.value;
+            });
+
+        } else if (name === 'industryFocus') {
+            filtered = filtered.filter(function(a) {
+              return a.industryFocus == event.target.value;
+            });
+        } else if (name === 'geographicFocus') {
+            filtered = filtered.filter(function(a) {
+              return a.geographicFocus == event.target.value;
+            });
+        }
+        setListings(filtered);
+        setTemp(filtered);
+    }
     setState({
       ...state,
       [name]: event.target.value,
@@ -132,7 +239,7 @@ const ListingPage = (props) => {
              throw new Error('Something went wrong ...');
           }
       })
-      .then(data => setListings(data.data.allListings))
+      .then(data => {setTemp(data.data.allListings); getTypes(data.data.allListings); setFull(data.data.allListings); setListings(data.data.allListings)})
       .catch(error => {console.log(error)});
   }
   useEffect(() => {
@@ -149,6 +256,8 @@ const ListingPage = (props) => {
           label="Search"
           type="search"
           variant="outlined"
+          value={search}
+          onChange={(e) => handleSearchOnChange(e)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -173,9 +282,9 @@ const ListingPage = (props) => {
             }}
           >
             <option value="" />
-            <option value={10}>Venture Capital</option>
-            <option value={20}>Grants</option>
-            <option value={30}>Angel</option>
+            {cTypes.map(name => (
+            <option value={name}>{name}</option>
+            ))}
           </Select>
         </FormControl>
         <FormControl margin='dense' variant="outlined" className={classes.formControl}>
@@ -192,9 +301,9 @@ const ListingPage = (props) => {
             }}
           >
             <option value="" />
-            <option value={10}>Washington</option>
-            <option value={20}>Pacific Northwest</option>
-            <option value={30}>Seattle</option>
+            {gTypes.map(name => (
+            <option value={name}>{name}</option>
+            ))}
           </Select>
         </FormControl>
         <FormControl margin='dense' variant="outlined" className={classes.formControl}>
@@ -211,9 +320,9 @@ const ListingPage = (props) => {
             }}
           >
             <option value="" />
-            <option value={10}>Boating</option>
-            <option value={20}>Energy</option>
-            <option value={30}>Rehabilitation</option>
+            {iTypes.map(name => (
+            <option value={name}>{name}</option>
+            ))}
           </Select>
         </FormControl>
         <FormControl margin='dense' variant="outlined" className={classes.formControl}>
@@ -230,27 +339,12 @@ const ListingPage = (props) => {
             }}
           >
             <option value="" />
-            <option value={10}>Name (A-Z)</option>
-            <option value={20}>Name (Z-A)</option>
-            <option value={30}>Investment Size</option>
+            <option value={'a-z'}>Name (A-Z)</option>
+            <option value={'z-a'}>Name (Z-A)</option>
+            <option value={'size'}>Investment Size</option>
+            <option value={'term'}>Investment Term</option>
           </Select>
         </FormControl>
-        <div className={classes.sliders}>
-          <Typography style={{color: '#006088'}} id="range-slider" variant="caption" gutterBottom>
-            Investment Size (0 - 100M)
-          </Typography>
-          <Slider
-            value={value}
-            max={1000}
-            step={10}
-            onChange={handleUpdate}
-            style={{color: '#006088'}}
-            valueLabelDisplay="auto"
-            valueLabelFormat={x => x + 'k'}
-            aria-labelledby="range-slider"
-            getAriaValueText={valuetext}
-          />
-        </div>
         <div className={classes.sliders}>
           <Typography style={{color: '#006088'}} id="range-slider" variant="caption" gutterBottom>
             Investment Term (0 - 15yr)
@@ -266,6 +360,13 @@ const ListingPage = (props) => {
             getAriaValueText={valuetext}
           />
         </div>
+        <Button
+              onClick={() => resetList()}
+              variant="contained"
+              className={classes.submit}
+             >
+              Reset
+        </Button>
       </div>
       <TableList key={listings} oppList={listings} viewDetail={props.viewDetail}/>
     </div>
