@@ -27,5 +27,10 @@ module.exports = {
       isRequired: true,
     },
   },
-  access: true,
+  access: {
+    read: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+    delete: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+    update: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+    create: ({ authentication }) => authentication.item != null,
+  },
 };

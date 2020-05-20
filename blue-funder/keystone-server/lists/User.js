@@ -18,5 +18,9 @@ module.exports = {
       type: Boolean,
     },
   },
-  access: ({ authentication: { item } }) => { return {} },
+  access: {
+    delete: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+    update: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+    create: ({ authentication }) => authentication.item != null && authentication.item.isAdmin,
+  },
 };
