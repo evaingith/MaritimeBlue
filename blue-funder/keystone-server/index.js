@@ -26,7 +26,7 @@ const ConnectRequestSchema = require('./lists/ConnectRequest.js');
 const ForgotRequestSchema = require('./lists/ForgottenPasswordRequest.js');
 
 const sessionStore = new MongoStore({ url: MONGO_URI });
-const cookieConfig = { path: '/', httpOnly: true, secure: false, maxAge: null };
+const cookieConfig = { path: '/', httpOnly: true, secure: process.env.NODE_ENV === 'production', maxAge: null };
 const adapterConfig = { mongoUri: MONGO_URI };
 
 const sessionManager = new SessionManager({
