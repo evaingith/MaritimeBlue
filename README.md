@@ -30,6 +30,22 @@ Then run the server in development mode with:
 
 You should then see that the keystone-server is now running and listening on port 3000
 
+### Deployment
+
+In order to deploy the application in a production like environment you'll first want to make sure you've defined all of the following variables in the index.js:
+
+* MONGO_URI: the uri of the mongodb instance that the app will connect to (default: 'mongodb://localhost/keystone')
+* PROJECT_ROOT: the url root of the project (default: '/MaritimeBlue')
+* PROJECT_NAME: the name of the project displayed in the admin UI (default: 'Blue Portal Admin Page')
+* SECRET: secret for signing cookies in authentication, please use a secure hash for this variable.
+* USE_AUTH: enable authentication for the app (default: true, only disable when setting up admin accounts)
+
+After all variables have been defined with correct credentials, you can build the project (in the /keystone-server dir) with: 
+```npm run build```
+
+Once that has been successfully built into your /dist directory, you begin running the production build with:
+```npm start```
+
 ### Architecture
 The application has 4 primary views associated, along with various other forms/screens to accompany functionality in these views. These 4 views are as follows:
 
