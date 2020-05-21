@@ -10,18 +10,25 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(expressSession);
+const path = require('path');
 
 const PROJECT_NAME = 'Blue Portal Admin Page';
 const SECRET = 'placeholdersecret';
-const adapterConfig = { mongoUri: 'mongodb://localhost/keystone' };
+const MONGO_URI = 'mongodb://localhost/keystone';
+const PROJECT_ROOT = '/MaritimeBlue';
+const USE_AUTH = true;
+
 const UserSchema = require('./lists/User.js');
 const UserRequestSchema = require('./lists/UserRequest.js');
 const ListingSchema = require('./lists/Listing.js');
 const ListingRequestSchema = require('./lists/ListingRequest.js');
 const ConnectRequestSchema = require('./lists/ConnectRequest.js');
 const ForgotRequestSchema = require('./lists/ForgottenPasswordRequest.js');
-const sessionStore = new MongoStore({ url: 'mongodb://localhost/keystone' });
+
+const sessionStore = new MongoStore({ url: MONGO_URI });
 const cookieConfig = { path: '/', httpOnly: true, secure: false, maxAge: null };
+const adapterConfig = { mongoUri: MONGO_URI };
+
 const sessionManager = new SessionManager({
       SECRET,
       cookieConfig,
@@ -110,19 +117,40 @@ const checkAuth = function(req, res, next) {
   }
 }
 
+let adminApp = {}
+if (USE_AUTH) {
+  adminApp = new AdminUIApp({ authStrategy,
+                              enableDefaultRoute: true,
+                              hooks: require.resolve('./hooks'),
+                              isAccessAllowed: ({ authentication: { item: user, listKey: list } }) => !!user && !!user.isAdmin });
+} else {
+  adminApp = new AdminUIApp({ enableDefaultRoute: true,
+                              hooks: require.resolve('./hooks')});
+
+}
+
 module.exports = {
   keystone,
-  apps: [new GraphQLApp(), new AdminUIApp({ authStrategy,
-                                            enableDefaultRoute: true,
-                                            hooks: require.resolve('./hooks'),
-                                            isAccessAllowed: ({ authentication: { item: user, listKey: list } }) => !!user && !!user.isAdmin })],
+  apps: [new GraphQLApp(), adminApp],
   configureExpress: app => {
-    app.use('/MaritimeBlue', express.static('public'))
+    app.use(PROJECT_ROOT, express.static('public'))
     app.use(expressSession({secret: SECRET}));
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.post('/signin', signin);
     app.post('/signout', signout);
     app.post('/checkAuth', checkAuth, ok_response);
+    app.get(PROJECT_ROOT + '/login', function(req, res, next) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'public/')});
+    });
+    app.get(PROJECT_ROOT + '/access', function(req, res, next) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'public/')});
+    });
+    app.get(PROJECT_ROOT + '/portal', function(req, res, next) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'public/')});
+    });
+    app.get(PROJECT_ROOT + '/resetpassword', function(req, res, next) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'public/')});
+    });
   },
 };

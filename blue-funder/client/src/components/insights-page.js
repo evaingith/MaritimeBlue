@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -62,7 +62,7 @@ const data03 = [
 const RADIAN = Math.PI / 180;
 
 const renderLabel = (entry) => {
-    return entry.name + '($' + entry.value + 'M)';
+    return entry.name + '($' + entry.value + 'K)';
 }
 
 const renderCustomizedLabel = ({
@@ -117,6 +117,104 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const InsightPage = () => {
+  const [listings, setListings] = React.useState([]);
+  const [totalList, setTotalList] = React.useState(0);
+  const [totalVol, setTotalVol] = React.useState('');
+  const [totalUser, setTotalUser] = React.useState(0);
+  const [newMonth, setNewMonth] = React.useState(0);
+  const [pieData, setPieData] = React.useState({});
+  const [barData, setBarData] = React.useState({});
+  const parseData = (data) => {
+    const currDate = new Date().toISOString();
+    let currMonth = currDate.substring(5, 6);
+    let currYear = currDate.substring(0, 3);
+    setListings(data);
+    setTotalList(data.length);
+    let totalVol = 0;
+    let newThisMonth = 0;
+    let fundDist = {};
+    let listDist= {};
+    let fundData = [];
+    let listData= [];
+    for (let i = 0; i < data.length; i++) {
+      let listMonth = data[i]['postedDate'].substring(5, 6);
+      let listYear = data[i]['postedDate'].substring(0, 3);
+      totalVol += parseInt(data[i]['investmentSize']);
+      if (listMonth === currMonth && listYear == currYear) {
+        newThisMonth++;
+      }
+      let amount = parseInt(data[i]['investmentSize']);
+      if (!(data[i]['capitalType'] in fundDist)) {
+        fundDist[data[i]['capitalType']] = amount;
+        listDist[data[i]['capitalType']] = 1;
+      } else {
+        fundDist[data[i]['capitalType']] += amount;
+        listDist[data[i]['capitalType']] += 1;
+      }
+    }
+    for (let type in fundDist) {
+      fundData.push({name: type, value: fundDist[type]})
+    }
+    for (let type in listDist) {
+      listData.push({name: type, value: listDist[type]})
+    }
+    setTotalVol("$" + totalVol + "K");
+    setNewMonth(newThisMonth);
+    setPieData(fundData);
+    setBarData(listData);
+  }
+  const fetchData = () => {
+    const GET_LISTINGS = `
+          query {
+            allListings {
+              investmentSize
+              capitalType
+              postedDate
+          }
+        }`;
+      fetch('/admin/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: GET_LISTINGS})
+      }).then(response => {
+           if (response.ok) {
+             return response.json();
+           } else {
+             throw new Error('Something went wrong ...');
+          }
+      })
+      .then(data => {parseData(data.data.allListings)})
+      .catch(error => {console.log(error)});
+  }
+  const fetchUserData = () => {
+    const GET_USER_META = `
+          query {
+            _allUsersMeta {
+              count
+          }
+        }`;
+      fetch('/admin/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: GET_USER_META})
+      }).then(response => {
+           if (response.ok) {
+             return response.json();
+           } else {
+             throw new Error('Something went wrong ...');
+          }
+      })
+      .then(data => {setTotalUser(data.data._allUsersMeta.count)})
+      .catch(error => {console.log(error)});
+  }
+  useEffect(() => {
+    fetchData();
+    fetchUserData();
+  }, []);
   const classes = useStyles();
   return (
     <div className={classes.content}>
@@ -131,7 +229,7 @@ const InsightPage = () => {
             </Typography>
             <div style={{ lineHeight: '75px', height: '130px'}}>
               <Typography style={{fontWeight: 'bold', color: '#0074D9'}} variant="h4" component="span">
-                268
+                {totalList}
               </Typography>
             </div>
           </div>
@@ -141,7 +239,7 @@ const InsightPage = () => {
             </Typography>
             <div style={{ lineHeight: '75px', height: '130px'}}>
               <Typography style={{fontWeight: 'bold', color: '#0074D9'}} variant="h5" component="span">
-                $427.525M
+                {totalVol}
               </Typography>
             </div>
           </div>
@@ -151,7 +249,7 @@ const InsightPage = () => {
             </Typography>
             <div style={{ lineHeight: '75px', height: '130px'}}>
               <Typography style={{fontWeight: 'bold', color: '#0074D9'}} variant="h4" component="span">
-                32
+                {newMonth}
               </Typography>
             </div>
           </div>
@@ -161,7 +259,7 @@ const InsightPage = () => {
             </Typography>
             <div style={{ lineHeight: '75px', height: '130px'}}>
               <Typography style={{fontWeight: 'bold', color: '#0074D9'}} variant="h4" component="span">
-                46
+                {totalUser}
               </Typography>
             </div>
           </div>
@@ -172,8 +270,7 @@ const InsightPage = () => {
         <div>
           <h1 style={{color: "#043464"}}>Funding Breakdown</h1>
           <PieChart width={600} height={500}>
-            <Pie data={data01} label={renderCustomizedLabel} dataKey="value" cx={280} cy={250} outerRadius={120} fill="#74BBFB" />
-            <Pie data={data02} dataKey="value" cx={280} cy={250} innerRadius={140} outerRadius={180} fill="#0074D9" label={renderLabel} />
+            <Pie data={pieData} dataKey="value" cx={280} cy={250} innerRadius={140} outerRadius={180} fill="#0074D9" label={renderLabel} />
           </PieChart>
         </div>
         <div>
@@ -181,7 +278,7 @@ const InsightPage = () => {
           <BarChart
             width={550}
             height={500}
-            data={data03}
+            data={barData}
             margin={{
               top: 50, right: 30, left: 0, bottom: 5,
             }}
