@@ -156,7 +156,7 @@ const InsightPage = () => {
       fundData.push({name: type, value: fundDist[type]})
     }
     for (let type in listDist) {
-      listData.push({name: type, value: listDist[type]})
+      listData.push({name: type, total: listDist[type]})
     }
     setTotalVol("$" + totalVol + "K");
     setNewMonth(newThisMonth);
