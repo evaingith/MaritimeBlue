@@ -30,6 +30,10 @@ Then run the server in development mode with:
 
 You should then see that the keystone-server is now running and listening on port 3000
 
+Your application can be accessed at /{PROJECT_ROOT} (default: "/MaritimeBlue")
+
+Admin view & controls can be accessed directly at /admin
+
 ### Deployment
 
 In order to deploy the application in a production like environment you'll first want to make sure you've defined all of the following variables in the index.js:
